@@ -3,27 +3,45 @@
 #include <string>
 #include <string.h>
 
-void cria_ficheiro_3d(std::string s){
+std::ofstream cria_ficheiro_3d(std::string s){
     std::ofstream fich;
     fich.open("3d/"+s);
+    return fich;
 
 }
 
 int cria_esfera(float radius, int slices, int stacks, std::string filename){
-      cria_ficheiro_3d(filename);
+      std::ofstream fich = cria_ficheiro_3d(filename);
+      std::string str_vertices = "";
+
+      fich.close();
 }
 
 int cria_caixa(float length, int divisions, std::string filename){
-      cria_ficheiro_3d(filename);
+      std::ofstream fich = cria_ficheiro_3d(filename);
+      std::string str_vertices = "";
+
+      fich.close();
 
 }
  
 int cria_cone(float radius, float height, int slices, int stacks, std::string filename){
-      cria_ficheiro_3d(filename);
+      std::ofstream fich = cria_ficheiro_3d(filename);
+      std::string str_vertices = "";
+
+      fich.close();
 }
 
 int cria_plano(float length, int divisions, std::string filename){
-      cria_ficheiro_3d(filename);
+      std::ofstream fich = cria_ficheiro_3d(filename);
+      std::string str_vertices = "";
+      str_vertices += "teste";
+      fich << str_vertices;
+
+
+
+
+      fich.close();
 
 }
 
