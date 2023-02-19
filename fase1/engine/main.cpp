@@ -76,8 +76,8 @@ void parse_xml(std::string figura) {
 
 	std::cout << path;
 	
-	/*
-	XMLDocument doc;
+	
+	XMLDocument doc;/*
 	
 	doc.LoadFile(path.c_str());
 	
