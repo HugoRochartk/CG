@@ -1,10 +1,19 @@
+#include "tinyxml2.h"
+#include <stdlib.h>
+#include <math.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdio>
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
 #endif
 
-#include <math.h>
+
+
 
 
 void changeSize(int w, int h)
@@ -27,8 +36,7 @@ void changeSize(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-int i = 1;
-int d = 6;
+
 
 void renderScene(void)
 {   
@@ -43,18 +51,9 @@ void renderScene(void)
 		0.0f, 1.0f, 0.0f);
 		
 	// put drawing instructions here
-	if (i <= 5) {
-		glutWireTeapot(i); //fazer a animçao da chavena
-		i++;
-	}
-	else {
-		glutWireTeapot(d);
-		d--;
-		if (d == 0) {
-			i = 1;
-			d = 6;
-		}
-	}
+	
+	glutWireTeapot(2); //fazer a animçao da chavena
+	
 	
 
 	
@@ -68,9 +67,53 @@ void renderScene(void)
 	
 }
 
+void parse_xml(std::string figura) {
+	using namespace tinyxml2;
+
+	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\test_";
+	path += figura;
+	path += ".xml";
+
+	std::cout << path;
+	
+	/*
+	XMLDocument doc;
+	
+	doc.LoadFile(path.c_str());
+	
+
+	if (doc.Error())
+	{
+		std::cout << "Erro ao carregar o ficheiro XML: " << doc.ErrorStr();
+	}
+
+	//...
+
+	doc.Clear();
+	*/
+
+
+}
+
 
 int main(int argc, char** argv)
 {   
+	std::ifstream fich("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\engine\\figura.txt", std::ios::in);
+	std::string figura;
+
+	if (fich.is_open()) {
+		std::getline(fich, figura);
+		fich.close();
+	}
+	else {
+		std::cout << "Não foi possível abrir o ficheiro figura.txt.";
+	}
+
+	remove("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\engine\\figura.txt");
+
+	parse_xml(figura);
+
+	
 	
 	// put GLUT’s init here
 	glutInit(&argc, argv); //iniciar o glut

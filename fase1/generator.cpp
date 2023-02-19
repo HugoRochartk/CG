@@ -62,8 +62,12 @@ void menu(char **argv){
     }
 
     else{
-		printf("Incorrect syntax.\n");
-		printf("Generate sphere, cone, box or plane.\n");
+        printf("Incorrect syntax.\n");
+        printf("You must type:\n");
+        printf("generator sphere [radius] [slices] [stacks] [3d filename]\n");
+        printf("generator cone [radius] [height] [slices] [stacks] [3d filename]\n");
+        printf("generator box [dimension] [number of divs per edge] [3d filename]\n");
+        printf("generator plane [length] [divisions] [3d file name]");
     }
 
 
@@ -71,6 +75,8 @@ void menu(char **argv){
 
 
 int main(int argc, char **argv){
+
+
 
 	if ((argc <= 3) || (argc >= 7)){
 		printf("Incorrect syntax.\n");
@@ -82,6 +88,13 @@ int main(int argc, char **argv){
 	}
 
 	menu(argv);
+
+    //escrever em figura.txt o nome da figura para ler no engine
+    std::ofstream fich;
+    fich.open("engine/figura.txt");
+    fich << argv[1];
+    fich.close();
+   
 
 	return 0;
 

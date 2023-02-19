@@ -1,0 +1,4 @@
+﻿  main.cpp
+main.obj : error LNK2019: símbolo externo não resolvido, "public: __thiscall tinyxml2::XMLDocument::XMLDocument(bool,enum tinyxml2::Whitespace)" (??0XMLDocument@tinyxml2@@QAE@_NW4Whitespace@1@@Z), referenciado na função "void __cdecl parse_xml(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?parse_xml@@YAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+main.obj : error LNK2019: símbolo externo não resolvido, "public: virtual __thiscall tinyxml2::XMLDocument::~XMLDocument(void)" (??1XMLDocument@tinyxml2@@UAE@XZ), referenciado na função "void __cdecl parse_xml(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?parse_xml@@YAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\Release\class1.exe : fatal error LNK1120: 2 externo não resolvidos
