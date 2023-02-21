@@ -5,13 +5,13 @@
 #include <fstream>
 #include <string>
 #include <cstdio>
+#include <vector>
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
 #endif
-
 
 
 
@@ -67,39 +67,147 @@ void renderScene(void)
 	
 }
 
-void parse_xml(std::string figura) {
-	using namespace tinyxml2;
 
-	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\test_";
+
+struct WindowData {
+	int height;
+	int width;
+};
+
+struct PositionData {
+	float x;
+	float y;
+	float z;
+};
+
+struct LookAtData {
+	float x;
+	float y;
+	float z;
+};
+
+struct UpData {
+	float x;
+	float y;
+	float z;
+};
+
+struct ProjectionData {
+	float fov;
+	float near;
+	float far;
+};
+
+struct CameraData {
+	PositionData position;
+	LookAtData look_at;
+	UpData up;
+	ProjectionData projection;
+};
+
+struct ModelData {
+	std::string nomes_ficheiros_3d;
+};
+
+
+struct WorldData {
+	WindowData window;
+	CameraData camera;
+	ModelData model;
+};
+
+
+void parse_xml(const std::string & figura, WorldData & data) {
+	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\test_"; //alterar aqui para os testes do stor
 	path += figura;
 	path += ".xml";
 
-	std::cout << path;
-	
-	
-	XMLDocument doc;/*
-	
-	doc.LoadFile(path.c_str());
-	
-
-	if (doc.Error())
-	{
-		std::cout << "Erro ao carregar o ficheiro XML: " << doc.ErrorStr();
+	tinyxml2::XMLDocument doc;
+	if (doc.LoadFile(path.c_str()) != tinyxml2::XML_SUCCESS) {
+		std::cerr << "Falha a abrir o ficheiro xml";
+		return;
 	}
 
-	//...
+	tinyxml2::XMLElement* world = doc.FirstChildElement("world");
+	if (!world) {
+		std::cerr << "Falha a encontrar o elemento world";
+		return;
+	}
 
-	doc.Clear();
-	*/
+		// Read window data
+	tinyxml2::XMLElement* window = world->FirstChildElement("window");
+	if (window) {
+		data.window.height = window->IntAttribute("height");
+		data.window.width = window->IntAttribute("width");
+	}
 
+		// Read camera data
+	tinyxml2::XMLElement* camera = world->FirstChildElement("camera");
+	if (camera) {
+		tinyxml2::XMLElement* position = camera->FirstChildElement("position");
+		if (position) {
+			data.camera.position.x = position->FloatAttribute("x");
+			data.camera.position.y = position->FloatAttribute("y");
+			data.camera.position.z = position->FloatAttribute("z");
+		}
+
+		tinyxml2::XMLElement* look_at = camera->FirstChildElement("lookAt");
+		if (look_at) {
+			data.camera.look_at.x = look_at->FloatAttribute("x");
+			data.camera.look_at.y = look_at->FloatAttribute("y");
+			data.camera.look_at.z = look_at->FloatAttribute("z");
+		}
+
+		tinyxml2::XMLElement* up = camera->FirstChildElement("up");
+		if (up) {
+			data.camera.up.x = up->FloatAttribute("x");
+			data.camera.up.y = up->FloatAttribute("y");
+			data.camera.up.z = up->FloatAttribute("z");
+		}
+
+		tinyxml2::XMLElement* projection = camera->FirstChildElement("projection");
+		if (projection) {
+			data.camera.projection.fov = projection->FloatAttribute("fov");
+			data.camera.projection.near = projection->FloatAttribute("near");
+			data.camera.projection.far = projection->FloatAttribute("far");
+		}
+	}
+
+		// Read group data
+	tinyxml2::XMLElement* group = world->FirstChildElement("group");
+	if (group) {
+		tinyxml2::XMLElement* models = group->FirstChildElement("models");
+		if (models) {
+			data.model.nomes_ficheiros_3d = "";
+			auto model = models->FirstChildElement("model");
+			while (model != nullptr) {
+				data.model.nomes_ficheiros_3d += model->Attribute("file");
+				data.model.nomes_ficheiros_3d += ",";
+				//ler ficheiros split por ,
+				model = model->NextSiblingElement("model");
+			}
+
+		}
+	}
+}
+	
+void imprime_xml(WorldData world) {
+	std::cout << world.window.height << " " << world.window.width << "\n";
+	std::cout << world.camera.position.x << " " << world.camera.position.y << " " << world.camera.position.z << "\n";
+	std::cout << world.camera.look_at.x << " " << world.camera.look_at.y << " " << world.camera.look_at.z << "\n";
+	std::cout << world.camera.up.x << " " << world.camera.up.y << " " << world.camera.up.z << "\n";
+	std::cout << world.camera.projection.far << " " << world.camera.projection.near << " " << world.camera.projection.fov << "\n";
+	std::cout << world.model.nomes_ficheiros_3d << "\n";
 
 }
+
 
 
 int main(int argc, char** argv)
 {   
 	std::ifstream fich("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\engine\\figura.txt", std::ios::in);
 	std::string figura;
+	WorldData world;
 
 	if (fich.is_open()) {
 		std::getline(fich, figura);
@@ -111,7 +219,10 @@ int main(int argc, char** argv)
 
 	remove("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\engine\\figura.txt");
 
-	parse_xml(figura);
+	parse_xml(figura, world);
+	imprime_xml(world);
+
+
 
 	
 	
