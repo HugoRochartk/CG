@@ -13,7 +13,7 @@
 #include <GL/glut.h>
 #endif
 
-
+float fov = 45.0, near = 1.0f, far = 1000.0f;
 
 
 void changeSize(int w, int h)
@@ -31,41 +31,16 @@ void changeSize(int w, int h)
 	// Set the viewport to be the entire window
 	glViewport(0, 0, w, h);
 	// Set the perspective
-	gluPerspective(45.0f, ratio, 1.0f, 1000.0f);
+	gluPerspective(fov, ratio, near, far);
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
 }
 
+float pos_x = 5.0f, pos_y = 5.0f, pos_z = 5.0f,
+      lookat_x = 0.0f, lookat_y = 0.0f, lookat_z = 0.0f,
+      up_x = 0.0f, up_y = 1.0f, up_z = 0.0f;
 
-
-void renderScene(void)
-{   
-	
-	// clear buffers
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa  a cor
-	
-	// set camera
-	glLoadIdentity();
-	gluLookAt(0.0f, 0.0f, 15.0f, //esquerda e direita, roda para cima e para baixo; onde a camera esta
-		0.0f, 0.0f, -1.0f, 
-		0.0f, 1.0f, 0.0f);
-		
-	// put drawing instructions here
-	
-	glutWireTeapot(2); //fazer a animçao da chavena
-	
-	
-
-	
-	
-	//glutSolidCube(1);
-	//glutWireCube(1); //so desenha arestas; parametro dimensao aresta
-	//sphere; cone; torus; teapot
-	
-	// End of frame
-	glutSwapBuffers();
-	
-}
+float width = 800, height = 800;
 
 
 
@@ -117,9 +92,9 @@ struct WorldData {
 };
 
 
-void parse_xml(const std::string & figura, WorldData & data) {
-	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\test_"; //alterar aqui para os testes do stor
-	path += figura;
+void parse_xml(const std::string & teste_xml, WorldData & data) {
+	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\"; 
+	path += teste_xml;
 	path += ".xml";
 
 	tinyxml2::XMLDocument doc;
@@ -189,6 +164,22 @@ void parse_xml(const std::string & figura, WorldData & data) {
 
 		}
 	}
+
+	pos_x = data.camera.position.x;
+	pos_y = data.camera.position.y;
+	pos_z = data.camera.position.z;
+	lookat_x = data.camera.look_at.x;
+	lookat_y = data.camera.look_at.y;
+	lookat_z = data.camera.look_at.z;
+	up_x = data.camera.up.x;
+	up_y = data.camera.up.y;
+	up_z = data.camera.up.z;
+	fov = data.camera.projection.fov;
+	near = data.camera.projection.near;
+	far = data.camera.projection.far;
+
+
+
 }
 	
 void imprime_xml(WorldData world) {
@@ -201,26 +192,64 @@ void imprime_xml(WorldData world) {
 
 }
 
+void renderScene(void)
+{
+
+	// clear buffers
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa  a cor
+
+	// set camera
+	glLoadIdentity();
+	gluLookAt(pos_x, pos_y, pos_z, //esquerda e direita, roda para cima e para baixo; onde a camera esta
+		lookat_x, lookat_y, lookat_z,
+		up_x, up_y, up_z);
+
+	// put drawing instructions here
+	//eixos
+	glBegin(GL_LINES);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-100.0f, 0.0f, 0.0f);
+	glVertex3f(100.0f, 0.0f, 0.0f);
+
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, -100.0f, 0.0f);
+	glVertex3f(0.0f, 100.0f, 0.0f);
+
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, -100.0f);
+	glVertex3f(0.0f, 0.0f, 100.0f);
+
+	glEnd();
+	//--------------------------------------
+	
+	
+
+
+
+
+	// End of frame
+	glutSwapBuffers();
+
+}
 
 
 int main(int argc, char** argv)
 {   
-	std::ifstream fich("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\engine\\figura.txt", std::ios::in);
-	std::string figura;
+	std::ifstream fich("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
+	std::string teste_xml;
 	WorldData world;
 
 	if (fich.is_open()) {
-		std::getline(fich, figura);
+		std::getline(fich, teste_xml);
 		fich.close();
 	}
 	else {
-		std::cout << "Não foi possível abrir o ficheiro figura.txt.";
+		std::cout << "Não foi possível abrir o ficheiro testar_xml.txt.\n";
 	}
 
-	remove("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\engine\\figura.txt");
 
-	parse_xml(figura, world);
-	imprime_xml(world);
+	parse_xml(teste_xml, world);
+	//imprime_xml(world);
 
 
 
@@ -230,7 +259,7 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv); //iniciar o glut
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA); //definir como queremos a janela
 	glutInitWindowPosition(100, 100); //posiçao da janela
-	glutInitWindowSize(800, 800); //tamanho janela
+	glutInitWindowSize(width, height); //tamanho janela
 	glutCreateWindow("CG@DI"); //cria a janela com o nome
 	
 	// put callback registry here

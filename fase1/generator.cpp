@@ -35,8 +35,7 @@ int cria_cone(float radius, float height, int slices, int stacks, std::string fi
 int cria_plano(float length, int divisions, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
       std::string str_vertices = "";
-      str_vertices += "teste";
-      fich << str_vertices;
+     
 
 
 
@@ -88,12 +87,6 @@ int main(int argc, char **argv){
 	}
 
 	menu(argv);
-
-    //escrever em figura.txt o nome da figura para ler no engine
-    std::ofstream fich;
-    fich.open("engine/figura.txt");
-    fich << argv[1];
-    fich.close();
    
 
 	return 0;
