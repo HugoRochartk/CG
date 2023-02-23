@@ -43,6 +43,9 @@ float pos_x = 5.0f, pos_y = 5.0f, pos_z = 5.0f,
 float width = 800, height = 800;
 
 
+std::vector<std::string> ficheiros_3d;
+
+
 
 struct WindowData {
 	int height;
@@ -81,7 +84,7 @@ struct CameraData {
 };
 
 struct ModelData {
-	std::string nomes_ficheiros_3d;
+	std::vector<std::string> nomes_ficheiros_3d;
 };
 
 
@@ -153,12 +156,9 @@ void parse_xml(const std::string & teste_xml, WorldData & data) {
 	if (group) {
 		tinyxml2::XMLElement* models = group->FirstChildElement("models");
 		if (models) {
-			data.model.nomes_ficheiros_3d = "";
 			auto model = models->FirstChildElement("model");
 			while (model != nullptr) {
-				data.model.nomes_ficheiros_3d += model->Attribute("file");
-				data.model.nomes_ficheiros_3d += ",";
-				//ler ficheiros split por ,
+				data.model.nomes_ficheiros_3d.push_back(model->Attribute("file"));
 				model = model->NextSiblingElement("model");
 			}
 
@@ -177,6 +177,7 @@ void parse_xml(const std::string & teste_xml, WorldData & data) {
 	fov = data.camera.projection.fov;
 	near = data.camera.projection.near;
 	far = data.camera.projection.far;
+	ficheiros_3d = data.model.nomes_ficheiros_3d;
 
 
 
@@ -188,7 +189,9 @@ void imprime_xml(WorldData world) {
 	std::cout << world.camera.look_at.x << " " << world.camera.look_at.y << " " << world.camera.look_at.z << "\n";
 	std::cout << world.camera.up.x << " " << world.camera.up.y << " " << world.camera.up.z << "\n";
 	std::cout << world.camera.projection.far << " " << world.camera.projection.near << " " << world.camera.projection.fov << "\n";
-	std::cout << world.model.nomes_ficheiros_3d << "\n";
+	for (std::string fich: world.model.nomes_ficheiros_3d) {
+		std::cout << fich << " ";
+	}
 
 }
 
@@ -249,7 +252,7 @@ int main(int argc, char** argv)
 
 
 	parse_xml(teste_xml, world);
-	//imprime_xml(world);
+	imprime_xml(world);
 
 
 
