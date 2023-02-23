@@ -43,7 +43,22 @@ float pos_x = 5.0f, pos_y = 5.0f, pos_z = 5.0f,
 float width = 800, height = 800;
 
 
+struct Ponto {
+	float x;
+	float y;
+	float z;
+
+	//construtor:
+	Ponto(float xi, float yi, float zi) {
+		this->x = xi;
+		this->y = yi;
+		this->z = zi;
+	}
+};
+
+
 std::vector<std::string> ficheiros_3d;
+std::vector<Ponto> pontos;
 
 
 
@@ -93,6 +108,8 @@ struct WorldData {
 	CameraData camera;
 	ModelData model;
 };
+
+
 
 
 void parse_xml(const std::string & teste_xml, WorldData & data) {
@@ -195,6 +212,37 @@ void imprime_xml(WorldData world) {
 
 }
 
+void le_pontos(std::vector<std::string> ficheiros_3d) {
+	
+	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
+	
+
+	for (std::string s_fich : ficheiros_3d) {
+		std::ifstream fich(path+=s_fich);
+		path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
+		if (fich.is_open()) {
+			float x, y, z;
+			while (fich >> x >> y >> z) {
+				pontos.push_back(Ponto(x, y, z));
+			}
+			fich.close();
+		}
+		else {
+			std::cout << "Não foi possível abrir o ficheiro " << s_fich << "\n";
+		}
+
+
+	}
+}
+
+
+void imprime_pontos(std::vector<Ponto> pontos) {
+
+	for (Ponto p : pontos) {
+		std::cout << p.x << " " << p.y << " " << p.z << "\n";
+	}
+}
+
 void renderScene(void)
 {
 
@@ -252,7 +300,9 @@ int main(int argc, char** argv)
 
 
 	parse_xml(teste_xml, world);
-	imprime_xml(world);
+	//imprime_xml(world);
+	le_pontos(ficheiros_3d);
+	//imprime_pontos(pontos);
 
 
 
