@@ -243,6 +243,9 @@ void imprime_pontos(std::vector<Ponto> pontos) {
 	}
 }
 
+
+	
+
 void renderScene(void)
 {
 
@@ -254,6 +257,8 @@ void renderScene(void)
 	gluLookAt(pos_x, pos_y, pos_z, //esquerda e direita, roda para cima e para baixo; onde a camera esta
 		lookat_x, lookat_y, lookat_z,
 		up_x, up_y, up_z);
+
+	glPolygonMode(GL_FRONT, GL_LINE);
 
 	// put drawing instructions here
 	//eixos
@@ -271,6 +276,16 @@ void renderScene(void)
 	glVertex3f(0.0f, 0.0f, 100.0f);
 
 	glEnd();
+
+	//pontos
+	glBegin(GL_TRIANGLES);
+	for (Ponto p : pontos) {
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glVertex3f(p.x, p.y, p.z);
+	}
+	glEnd();
+
+	
 	//--------------------------------------
 	
 	
@@ -303,6 +318,7 @@ int main(int argc, char** argv)
 	//imprime_xml(world);
 	le_pontos(ficheiros_3d);
 	//imprime_pontos(pontos);
+	
 
 
 
