@@ -12,14 +12,14 @@ std::ofstream cria_ficheiro_3d(std::string s){
 
 }
 
-int cria_esfera(float radius, int slices, int stacks, std::string filename){
+void cria_esfera(float radius, int slices, int stacks, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
       std::stringstream str_vertices;
 
       fich.close();
 }
 
-int cria_caixa(float length, int divisions, std::string filename){
+void cria_caixa(float length, int divisions, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
       std::stringstream str_vertices;
 
@@ -112,7 +112,7 @@ int cria_caixa(float length, int divisions, std::string filename){
 
 }
  
-int cria_cone(float radius, float height, int slices, int stacks, std::string filename){
+void cria_cone(float radius, float height, int slices, int stacks, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
       std::stringstream str_vertices;
 
@@ -126,23 +126,61 @@ int cria_cone(float radius, float height, int slices, int stacks, std::string fi
           z2 = radius * cos(i * alpha);
           z1 = radius * cos((i + 1) * alpha);
 
-          str_vertices << x1 << ' ' << 0 << ' ' << z1 << '\n';
+          str_vertices << x2 << ' ' << 0 << ' ' << z2 << '\n';
           str_vertices << 0 << ' ' << 0 << ' ' << 0 << '\n';
-          str_vertices << x2 << ' ' << 0 << ' ' << z2 << '\n';
-
-          str_vertices << 0 << ' ' << height << ' ' << 0 << '\n';
-          str_vertices << x2 << ' ' << 0 << ' ' << z2 << '\n';
           str_vertices << x1 << ' ' << 0 << ' ' << z1 << '\n';
 
 
-        
+
+      }
+
+      float x3, z3, x4, z4, y1, y2;
+      float stack_height = height / stacks; // altura de cada stack 
+      float cone_ratio = height / radius; // valor da altura em funcao do raio -> h = 3.2 * raio
+      float height_stack_atual, height_stack_seguinte, raio_stack_atual, raio_stack_seguinte;
+      for (int i = 0; i < stacks; i++) {
+          for (int j = 0; j < slices; j++) {
+              height_stack_atual = height - (i * stack_height);
+              height_stack_seguinte = height - ((i + 1) * stack_height);
+
+              raio_stack_atual = height_stack_atual / cone_ratio; //raio dos pontos que se encontram na stack = i
+              raio_stack_seguinte = height_stack_seguinte / cone_ratio; // raio dos pontos que se encontram na stack = i+1
+
+              y1 = (i * stack_height);
+
+              x1 = raio_stack_atual * sin(j * alpha);
+              z1 = raio_stack_atual * cos(j * alpha);
+
+              x2 = raio_stack_atual * sin((j+1) * alpha);
+              z2 = raio_stack_atual * cos((j+1) * alpha);
+
+              y2 = (i + 1) * stack_height;
+
+              x3 = raio_stack_seguinte * sin((j + 1) * alpha);
+              z3 = raio_stack_seguinte * cos((j + 1) * alpha);
+
+              x4 = raio_stack_seguinte * sin(j * alpha);
+              z4 = raio_stack_seguinte * cos(j * alpha);
+
+              
+
+            str_vertices << x1 << ' ' << y1 << ' ' << z1 << '\n';
+            str_vertices << x2 << ' ' << y1 << ' ' << z2 << '\n';
+            str_vertices << x4 << ' ' << y2 << ' ' << z4 << '\n';
+
+            if (j != slices - 1) {
+                str_vertices << x4 << ' ' << y2 << ' ' << z4 << '\n';
+                str_vertices << x2 << ' ' << y1 << ' ' << z2 << '\n';
+                str_vertices << x3 << ' ' << y2 << ' ' << z3 << '\n';
+            }
+          }
       }
 
       fich << str_vertices.str();
       fich.close();
 }
 
-int cria_plano(float length, int divisions, std::string filename){
+void cria_plano(float length, int divisions, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
       std::stringstream str_vertices;
      

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine
+# Install script for directory: C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -113,7 +113,8 @@ struct WorldData {
 
 
 void parse_xml(const std::string & teste_xml, WorldData & data) {
-	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\"; 
+	//std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\"; 
+	std::string path = "..\\..\\tests\\test_files_phase_1\\";
 	path += teste_xml;
 	path += ".xml";
 
@@ -214,12 +215,14 @@ void imprime_xml(WorldData world) {
 
 void le_pontos(std::vector<std::string> ficheiros_3d) {
 	
-	std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
+	//std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
+	std::string path = "..\\..\\3d\\";
 	
 
 	for (std::string s_fich : ficheiros_3d) {
 		std::ifstream fich(path+=s_fich);
-		path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
+		//path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
+		path = "..\\..\\3d\\";
 		if (fich.is_open()) {
 			float x, y, z;
 			while (fich >> x >> y >> z) {
@@ -254,7 +257,7 @@ void renderScene(void)
 
 	// set camera
 	glLoadIdentity();
-	gluLookAt(5, 5, 5,//pos_x, pos_y, pos_z, //esquerda e direita, roda para cima e para baixo; onde a camera esta
+	gluLookAt(pos_x, pos_y, pos_z,
 		lookat_x, lookat_y, lookat_z,
 		up_x, up_y, up_z);
 
@@ -301,7 +304,8 @@ void renderScene(void)
 
 int main(int argc, char** argv)
 {   
-	std::ifstream fich("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
+	//std::ifstream fich("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
+	std::ifstream fich("..\\..\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
 	std::string teste_xml;
 	WorldData world;
 
