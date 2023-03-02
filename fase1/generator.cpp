@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <string.h>
+#include <math.h>
 
 std::ofstream cria_ficheiro_3d(std::string s){
     std::ofstream fich;
@@ -12,31 +14,160 @@ std::ofstream cria_ficheiro_3d(std::string s){
 
 int cria_esfera(float radius, int slices, int stacks, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
-      std::string str_vertices = "";
+      std::stringstream str_vertices;
 
       fich.close();
 }
 
 int cria_caixa(float length, int divisions, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
-      std::string str_vertices = "";
+      std::stringstream str_vertices;
 
+      float x1, x2, y1, y2, z1, z2;
+      float y = -length/2;
+      
+      for (int i = 0; i < divisions; i++) {
+          z1 = (i * (length / divisions)) - (length / 2);
+          z2 = ((i + 1) * (length / divisions)) - (length / 2);
+          for (int j = 0; j < divisions; j++) {
+              x1 = (j * (length / divisions)) - (length / 2);
+              x2 = ((j + 1) * (length / divisions)) - (length / 2);
+
+              str_vertices << x2 << ' ' << y << ' ' << z1 << '\n';
+              str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
+              str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
+
+              str_vertices << x1 << ' ' << y << ' ' << z2 << '\n';
+              str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
+              str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
+
+              str_vertices << x2 << ' ' << -y << ' ' << z1 << '\n';
+              str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
+              str_vertices << x2 << ' ' << -y << ' ' << z2 << '\n';
+
+              str_vertices << x1 << ' ' << -y << ' ' << z2 << '\n';
+              str_vertices << x2 << ' ' << -y << ' ' << z2 << '\n';
+              str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
+          }
+      }
+      
+      float x = -length / 2;
+
+      for (int i = 0; i < divisions; i++) {
+          y1 = (i * (length / divisions)) - (length / 2);
+          y2 = ((i + 1) * (length / divisions)) - (length / 2);
+          for (int j = 0; j < divisions; j++) {
+              z1 = (j * (length / divisions)) - (length / 2);
+              z2 = ((j + 1) * (length / divisions)) - (length / 2);
+
+              str_vertices << x << ' ' << y2 << ' ' << z1 << '\n';
+              str_vertices << x << ' ' << y2 << ' ' << z2 << '\n';
+              str_vertices << x << ' ' << y1 << ' ' << z1 << '\n';
+
+              str_vertices << x << ' ' << y1 << ' ' << z2 << '\n';
+              str_vertices << x << ' ' << y1 << ' ' << z1 << '\n';
+              str_vertices << x << ' ' << y2 << ' ' << z2 << '\n';
+
+              str_vertices << -x << ' ' << y2 << ' ' << z1 << '\n';
+              str_vertices << -x << ' ' << y2 << ' ' << z2 << '\n';
+              str_vertices << -x << ' ' << y1 << ' ' << z1 << '\n';
+
+              str_vertices << -x << ' ' << y1 << ' ' << z2 << '\n';
+              str_vertices << -x << ' ' << y1 << ' ' << z1 << '\n';
+              str_vertices << -x << ' ' << y2 << ' ' << z2 << '\n';
+          }
+      }
+      
+
+      float z = length / 2;
+
+      for (int i = 0; i < divisions; i++) {
+          y1 = (i * (length / divisions)) - (length / 2);
+          y2 = ((i + 1) * (length / divisions)) - (length / 2);
+          for (int j = 0; j < divisions; j++) {
+              x1 = (j * (length / divisions)) - (length / 2);
+              x2 = ((j + 1) * (length / divisions)) - (length / 2);
+
+              str_vertices << x2 << ' ' << y2 << ' ' << z << '\n';
+              str_vertices << x1 << ' ' << y2 << ' ' << z << '\n';
+              str_vertices << x1 << ' ' << y1 << ' ' << z << '\n';
+
+              str_vertices << x1 << ' ' << y1 << ' ' << z << '\n';
+              str_vertices << x2 << ' ' << y1 << ' ' << z << '\n';
+              str_vertices << x2 << ' ' << y2 << ' ' << z << '\n';
+
+              str_vertices << x2 << ' ' << y2 << ' ' << -z << '\n';
+              str_vertices << x1 << ' ' << y2 << ' ' << -z << '\n';
+              str_vertices << x1 << ' ' << y1 << ' ' << -z << '\n';
+
+              str_vertices << x1 << ' ' << y1 << ' ' << -z << '\n';
+              str_vertices << x2 << ' ' << y1 << ' ' << -z << '\n';
+              str_vertices << x2 << ' ' << y2 << ' ' << -z << '\n';
+
+          }
+      }
+      
+      fich << str_vertices.str();
       fich.close();
 
 }
  
 int cria_cone(float radius, float height, int slices, int stacks, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
-      std::string str_vertices = "";
+      std::stringstream str_vertices;
 
+      float alpha = (2 * M_PI) / slices;
+      float x1, x2, z1, z2;
+      float y = height;
+
+      for (int i = 0; i < slices; i++) {
+          x2 = radius * sin(i * alpha);
+          x1 = radius * sin((i+1) * alpha);
+          z2 = radius * cos(i * alpha);
+          z1 = radius * cos((i + 1) * alpha);
+
+          str_vertices << x1 << ' ' << 0 << ' ' << z1 << '\n';
+          str_vertices << 0 << ' ' << 0 << ' ' << 0 << '\n';
+          str_vertices << x2 << ' ' << 0 << ' ' << z2 << '\n';
+
+          str_vertices << 0 << ' ' << height << ' ' << 0 << '\n';
+          str_vertices << x2 << ' ' << 0 << ' ' << z2 << '\n';
+          str_vertices << x1 << ' ' << 0 << ' ' << z1 << '\n';
+
+
+        
+      }
+
+      fich << str_vertices.str();
       fich.close();
 }
 
 int cria_plano(float length, int divisions, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
-      std::string str_vertices = "";
+      std::stringstream str_vertices;
      
+      float x1, x2, z1, z2;
+      float y = 0;
 
+      for (int i = 0; i < divisions; i++) {
+          z1 = (i * (length/divisions)) - (length/2);
+          z2 = ((i + 1) * (length/divisions)) - (length/2);
+          for (int j = 0; j < divisions; j++) {
+              x1 = (j * (length/divisions)) - (length/2);
+              x2 = ((j + 1) * (length/divisions)) - (length/2);
+           
+              str_vertices << x2 << ' ' << y << ' ' << z1 << '\n'; 
+              str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
+              str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
+
+              str_vertices << x1 << ' ' << y << ' ' << z2 << '\n';
+              str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
+              str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
+          }
+      }
+      
+      
+      fich << str_vertices.str();
 
 
 
@@ -77,7 +208,7 @@ int main(int argc, char **argv){
 
 
 
-	if ((argc <= 3) || (argc >= 7)){
+	if ((argc <= 4) || (argc >= 8)){
 		printf("Incorrect syntax.\n");
 		printf("You must type:\n");
 		printf("generator sphere [radius] [slices] [stacks] [3d filename]\n");

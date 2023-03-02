@@ -254,7 +254,7 @@ void renderScene(void)
 
 	// set camera
 	glLoadIdentity();
-	gluLookAt(pos_x, pos_y, pos_z, //esquerda e direita, roda para cima e para baixo; onde a camera esta
+	gluLookAt(5, 5, 5,//pos_x, pos_y, pos_z, //esquerda e direita, roda para cima e para baixo; onde a camera esta
 		lookat_x, lookat_y, lookat_z,
 		up_x, up_y, up_z);
 
@@ -329,7 +329,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA); //definir como queremos a janela
 	glutInitWindowPosition(100, 100); //posiçao da janela
 	glutInitWindowSize(width, height); //tamanho janela
-	glutCreateWindow("CG@DI"); //cria a janela com o nome
+	glutCreateWindow("CG@TP"); //cria a janela com o nome
 	
 	// put callback registry here
 	glutReshapeFunc(changeSize); //chama uma funçao com 2 parametros width e height (changeSize)
