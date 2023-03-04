@@ -16,6 +16,45 @@ void cria_esfera(float radius, int slices, int stacks, std::string filename){
       std::ofstream fich = cria_ficheiro_3d(filename);
       std::stringstream str_vertices;
 
+    
+
+      float alpha = (2 * M_PI) / slices; //valor angulo alpha
+      float beta = M_PI / stacks; //valor angulo beta, nao precisa de ser 2pi porque nao vai dar a volta a esfera
+      float px1, px2, px3, px4, py1, py2, pz1, pz2, pz3, pz4; //coordenadas cartezianas
+
+      for (int i = 0; i < slices; i++) {
+            for (int j = 0; j < stacks; j++) {
+                  //cria um quadrado composto por 2 triangulos a cada iteraçâo ou apenas um triangulo na primeira e ultima iteraçao
+                px1 = radius * cos(M_PI_2 - j * beta) * sin(i * alpha); //ponto comum aos dois 
+                px2 = radius * cos(M_PI_2 - (j + 1) * beta) * sin(i * alpha); //ponto do primeiro
+                px3 = radius * cos(M_PI_2 - (j + 1) * beta) * sin((i + 1) * alpha); //ponto comum aos dois
+                px4 = radius * cos(M_PI_2 - j * beta) * sin((i + 1) * alpha); //ponto do segundo
+
+                py1 = radius * sin(M_PI_2 - j * beta); //valor superior y
+                py2 = radius * sin(M_PI_2 - (j + 1) * beta); //valor inferior y
+
+                pz1 = radius * cos(M_PI_2 - j * beta) * cos(i * alpha); //ponto comum aos dois 
+                pz2 = radius * cos(M_PI_2 - (j + 1) * beta) * cos(i * alpha); //ponto do primeiro
+                pz3 = radius * cos(M_PI_2 - (j + 1) * beta) * cos((i + 1) * alpha); //ponto comum aos dois 
+                pz4 = radius * cos(M_PI_2 - j * beta) * cos((i + 1) * alpha); //ponto do segundo
+
+
+               
+               str_vertices << px1 << ' ' << py1 << ' ' << pz1 << '\n';
+               str_vertices << px2 << ' ' << py2 << ' ' << pz2 << '\n';
+               str_vertices << px3 << ' ' << py2 << ' ' << pz3 << '\n';
+                
+
+               
+               str_vertices << px1 << ' ' << py1 << ' ' << pz1 << '\n';            
+               str_vertices << px3 << ' ' << py2 << ' ' << pz3 << '\n';
+               str_vertices << px4 << ' ' << py1 << ' ' << pz4 << '\n';
+                
+            }
+      
+      }
+ 
+      fich << str_vertices.str();
       fich.close();
 }
 
@@ -168,11 +207,11 @@ void cria_cone(float radius, float height, int slices, int stacks, std::string f
             str_vertices << x2 << ' ' << y1 << ' ' << z2 << '\n';
             str_vertices << x4 << ' ' << y2 << ' ' << z4 << '\n';
 
-            if (j != slices - 1) {
-                str_vertices << x4 << ' ' << y2 << ' ' << z4 << '\n';
-                str_vertices << x2 << ' ' << y1 << ' ' << z2 << '\n';
-                str_vertices << x3 << ' ' << y2 << ' ' << z3 << '\n';
-            }
+            
+            str_vertices << x4 << ' ' << y2 << ' ' << z4 << '\n';
+            str_vertices << x2 << ' ' << y1 << ' ' << z2 << '\n';
+            str_vertices << x3 << ' ' << y2 << ' ' << z3 << '\n';
+            
           }
       }
 
@@ -256,6 +295,7 @@ int main(int argc, char **argv){
 	}
 
 	menu(argv);
+    
    
 
 	return 0;

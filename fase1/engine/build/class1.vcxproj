@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2574E924-20EC-3B21-8DC9-74DF2A61A3F2}</ProjectGuid>
+    <ProjectGuid>{7100ED00-8EEB-398C-A14B-5FB1C2D06DEC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <Platform>Win32</Platform>
@@ -59,25 +59,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">class1.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">class1</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">class1.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">class1</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">class1.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">class1</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">class1.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">class1</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -103,10 +103,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -114,13 +114,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\Utilizador\Desktop\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/Debug/class1.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/Debug/class1.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/Debug/class1.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/Debug/class1.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -146,10 +146,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -157,13 +157,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\Utilizador\Desktop\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/Release/class1.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/Release/class1.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/Release/class1.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/Release/class1.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -172,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -189,10 +189,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -200,13 +200,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\Utilizador\Desktop\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/MinSizeRel/class1.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/MinSizeRel/class1.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/MinSizeRel/class1.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/MinSizeRel/class1.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -215,7 +215,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -231,10 +231,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Utilizador\Desktop\CG\toolkits\glut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -242,13 +242,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;C:\Users\Utilizador\Desktop\CG\toolkits\glut\glut32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/RelWithDebInfo/class1.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/RelWithDebInfo/class1.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/RelWithDebInfo/class1.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/RelWithDebInfo/class1.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -256,12 +256,12 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
       <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</BuildInParallel>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-D:\Programas\cmake-3.26.0-rc2-windows-x86_64\bin\cmake.exe "-SC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine" "-BC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build" --check-stamp-file "C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/CMakeFiles/generate.stamp"
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build --check-stamp-file C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -269,13 +269,13 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindOpenGL.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindOpenGL.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
       <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</BuildInParallel>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-D:\Programas\cmake-3.26.0-rc2-windows-x86_64\bin\cmake.exe "-SC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine" "-BC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build" --check-stamp-file "C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/CMakeFiles/generate.stamp"
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build --check-stamp-file C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -283,13 +283,13 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindOpenGL.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindOpenGL.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
       <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</BuildInParallel>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-D:\Programas\cmake-3.26.0-rc2-windows-x86_64\bin\cmake.exe "-SC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine" "-BC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build" --check-stamp-file "C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/CMakeFiles/generate.stamp"
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build --check-stamp-file C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -297,13 +297,13 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindOpenGL.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindOpenGL.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
       <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</BuildInParallel>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-D:\Programas\cmake-3.26.0-rc2-windows-x86_64\bin\cmake.exe "-SC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine" "-BC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build" --check-stamp-file "C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/CMakeFiles/generate.stamp"
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build --check-stamp-file C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -311,18 +311,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindOpenGL.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\FindPackageMessage.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\Programas\cmake-3.26.0-rc2-windows-x86_64\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeCXXCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeRCCompiler.cmake;C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\3.26.0-rc2\CMakeSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindOpenGL.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake;C:\Users\Utilizador\Desktop\CG\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\main.cpp" />
+    <ClCompile Include="C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\main.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\build\ZERO_CHECK.vcxproj">
-      <Project>{B66D05CE-D6CC-3051-B27F-91C1E4E38BB0}</Project>
+    <ProjectReference Include="C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\build\ZERO_CHECK.vcxproj">
+      <Project>{CE56D4C0-4D4D-3342-B661-B57B29313A41}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

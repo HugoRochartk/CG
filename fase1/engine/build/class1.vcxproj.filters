@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\main.cpp">
+    <ClCompile Include="C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\GL702V\OneDrive - Universidade do Minho\Ambiente de Trabalho\UM\3ano2sem\CG\CG\fase1\engine\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Utilizador\Desktop\CG-Projeto\fase1\engine\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{BB9AE8A0-B397-3CF0-90EE-56B3BF3F3B70}</UniqueIdentifier>
+      <UniqueIdentifier>{AEC34008-BE46-32E4-A803-98ADA348CABA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

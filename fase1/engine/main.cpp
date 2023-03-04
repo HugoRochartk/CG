@@ -112,8 +112,7 @@ struct WorldData {
 
 
 
-void parse_xml(const std::string & teste_xml, WorldData & data) {
-	//std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\"; 
+void parse_xml(const std::string & teste_xml, WorldData & data) { 
 	std::string path = "..\\..\\tests\\test_files_phase_1\\";
 	path += teste_xml;
 	path += ".xml";
@@ -215,13 +214,12 @@ void imprime_xml(WorldData world) {
 
 void le_pontos(std::vector<std::string> ficheiros_3d) {
 	
-	//std::string path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
+	;
 	std::string path = "..\\..\\3d\\";
 	
 
 	for (std::string s_fich : ficheiros_3d) {
 		std::ifstream fich(path+=s_fich);
-		//path = "C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\3d\\";
 		path = "..\\..\\3d\\";
 		if (fich.is_open()) {
 			float x, y, z;
@@ -304,7 +302,7 @@ void renderScene(void)
 
 int main(int argc, char** argv)
 {   
-	//std::ifstream fich("C:\\Users\\Utilizador\\Desktop\\CG-Projeto\\fase1\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
+	
 	std::ifstream fich("..\\..\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
 	std::string teste_xml;
 	WorldData world;
@@ -348,5 +346,6 @@ int main(int argc, char** argv)
 	// enter GLUT’s main cycle
 	glutMainLoop(); //ciclo do glut; enquanto a janela nao for fechada chama o renderScene e processa eventos
 	
+
 	return 1;
 }

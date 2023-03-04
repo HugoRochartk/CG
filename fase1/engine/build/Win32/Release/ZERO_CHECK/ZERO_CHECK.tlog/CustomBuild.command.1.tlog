@@ -1,6 +1,6 @@
-^C:\USERS\GL702V\ONEDRIVE - UNIVERSIDADE DO MINHO\AMBIENTE DE TRABALHO\UM\3ANO2SEM\CG\CG\FASE1\ENGINE\BUILD\CMAKEFILES\D3E290877786D2BB1118C8DE89E48520\GENERATE.STAMP.RULE
+^C:\USERS\UTILIZADOR\DESKTOP\CG-PROJETO\FASE1\ENGINE\BUILD\CMAKEFILES\794CB4C7890C64E31EC70DA3F77DD3D2\GENERATE.STAMP.RULE
 setlocal
-D:\Programas\cmake-3.26.0-rc2-windows-x86_64\bin\cmake.exe "-SC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine" "-BC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/class1.sln"
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/class1.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

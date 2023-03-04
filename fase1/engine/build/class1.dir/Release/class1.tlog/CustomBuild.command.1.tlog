@@ -1,6 +1,6 @@
-^C:\USERS\GL702V\ONEDRIVE - UNIVERSIDADE DO MINHO\AMBIENTE DE TRABALHO\UM\3ANO2SEM\CG\CG\FASE1\ENGINE\CMAKELISTS.TXT
+^C:\USERS\UTILIZADOR\DESKTOP\CG-PROJETO\FASE1\ENGINE\CMAKELISTS.TXT
 setlocal
-D:\Programas\cmake-3.26.0-rc2-windows-x86_64\bin\cmake.exe "-SC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine" "-BC:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build" --check-stamp-file "C:/Users/GL702V/OneDrive - Universidade do Minho/Ambiente de Trabalho/UM/3ano2sem/CG/CG/fase1/engine/build/CMakeFiles/generate.stamp"
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build --check-stamp-file C:/Users/Utilizador/Desktop/CG-Projeto/fase1/engine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
