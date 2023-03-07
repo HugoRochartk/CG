@@ -24,7 +24,7 @@ void cria_esfera(float radius, int slices, int stacks, std::string filename){
 
       for (int i = 0; i < slices; i++) {
             for (int j = 0; j < stacks; j++) {
-                  //cria um quadrado composto por 2 triangulos a cada iteraçâo ou apenas um triangulo na primeira e ultima iteraçao
+                  //cria um quadrado composto por 2 triangulos a cada iteraï¿½ï¿½o ou apenas um triangulo na primeira e ultima iteraï¿½ao
                 px1 = radius * cos(M_PI_2 - j * beta) * sin(i * alpha); //ponto comum aos dois 
                 px2 = radius * cos(M_PI_2 - (j + 1) * beta) * sin(i * alpha); //ponto do primeiro
                 px3 = radius * cos(M_PI_2 - (j + 1) * beta) * sin((i + 1) * alpha); //ponto comum aos dois
@@ -72,21 +72,21 @@ void cria_caixa(float length, int divisions, std::string filename){
               x1 = (j * (length / divisions)) - (length / 2);
               x2 = ((j + 1) * (length / divisions)) - (length / 2);
 
-              str_vertices << x2 << ' ' << y << ' ' << z1 << '\n';
               str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
               str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
+              str_vertices << x2 << ' ' << y << ' ' << z1 << '\n';
 
+              str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
               str_vertices << x1 << ' ' << y << ' ' << z2 << '\n';
               str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
-              str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
 
-              str_vertices << x2 << ' ' << -y << ' ' << z1 << '\n';
-              str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
               str_vertices << x2 << ' ' << -y << ' ' << z2 << '\n';
+              str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
+              str_vertices << x2 << ' ' << -y << ' ' << z1 << '\n';
 
               str_vertices << x1 << ' ' << -y << ' ' << z2 << '\n';
-              str_vertices << x2 << ' ' << -y << ' ' << z2 << '\n';
               str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
+              str_vertices << x2 << ' ' << -y << ' ' << z2 << '\n';
           }
       }
       
