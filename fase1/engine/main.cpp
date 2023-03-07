@@ -37,8 +37,8 @@ void changeSize(int w, int h)
 }
 
 float pos_x = 5.0f, pos_y = 5.0f, pos_z = 5.0f,
-      lookat_x = 0.0f, lookat_y = 0.0f, lookat_z = 0.0f,
-      up_x = 0.0f, up_y = 1.0f, up_z = 0.0f;
+lookat_x = 0.0f, lookat_y = 0.0f, lookat_z = 0.0f,
+up_x = 0.0f, up_y = 1.0f, up_z = 0.0f;
 
 float width = 800, height = 800;
 
@@ -57,8 +57,16 @@ struct Ponto {
 };
 
 
-std::vector<std::string> ficheiros_3d;
-std::vector<Ponto> pontos;
+struct Figura {
+	std::string nome_ficheiro_3d;
+	std::vector<Ponto> pontos;
+
+	Figura(std::string nick, std::vector<Ponto> pontos_aux) {
+		this->nome_ficheiro_3d = nick;
+		this->pontos = pontos_aux;
+	}
+
+};
 
 
 
@@ -98,21 +106,40 @@ struct CameraData {
 	ProjectionData projection;
 };
 
-struct ModelData {
-	std::vector<std::string> nomes_ficheiros_3d;
-};
-
 
 struct WorldData {
 	WindowData window;
 	CameraData camera;
-	ModelData model;
 };
 
 
+std::vector<Figura> figuras;
+
+std::vector<Ponto> armazena_pontos(std::string nome_fich) {
 
 
-void parse_xml(const std::string & teste_xml, WorldData & data) { 
+	std::string path = "..\\..\\3d\\";
+	path += nome_fich;
+	std::vector<Ponto> res;
+
+
+	std::ifstream fich(path);
+	if (fich.is_open()) {
+		float x, y, z;
+		while (fich >> x >> y >> z) {
+			res.push_back(Ponto(x, y, z));
+		}
+		fich.close();
+	}
+	else {
+		std::cout << "Não foi possível abrir o ficheiro " << nome_fich << "\n";
+	}
+
+	return res;
+
+}
+
+void parse_xml(const std::string& teste_xml, WorldData& data) {
 	std::string path = "..\\..\\tests\\test_files_phase_1\\";
 	path += teste_xml;
 	path += ".xml";
@@ -129,14 +156,14 @@ void parse_xml(const std::string & teste_xml, WorldData & data) {
 		return;
 	}
 
-		// Read window data
+	// Read window data
 	tinyxml2::XMLElement* window = world->FirstChildElement("window");
 	if (window) {
 		data.window.height = window->IntAttribute("height");
 		data.window.width = window->IntAttribute("width");
 	}
 
-		// Read camera data
+	// Read camera data
 	tinyxml2::XMLElement* camera = world->FirstChildElement("camera");
 	if (camera) {
 		tinyxml2::XMLElement* position = camera->FirstChildElement("position");
@@ -168,14 +195,16 @@ void parse_xml(const std::string & teste_xml, WorldData & data) {
 		}
 	}
 
-		// Read group data
+	// Read group data
 	tinyxml2::XMLElement* group = world->FirstChildElement("group");
 	if (group) {
 		tinyxml2::XMLElement* models = group->FirstChildElement("models");
 		if (models) {
 			auto model = models->FirstChildElement("model");
 			while (model != nullptr) {
-				data.model.nomes_ficheiros_3d.push_back(model->Attribute("file"));
+				std::vector<Ponto> aux;
+				aux = armazena_pontos(model->Attribute("file"));
+				figuras.push_back(Figura(model->Attribute("file"), aux));
 				model = model->NextSiblingElement("model");
 			}
 
@@ -194,58 +223,11 @@ void parse_xml(const std::string & teste_xml, WorldData & data) {
 	fov = data.camera.projection.fov;
 	near = data.camera.projection.near;
 	far = data.camera.projection.far;
-	ficheiros_3d = data.model.nomes_ficheiros_3d;
-
 
 
 }
-	
-void imprime_xml(WorldData world) {
-	std::cout << world.window.height << " " << world.window.width << "\n";
-	std::cout << world.camera.position.x << " " << world.camera.position.y << " " << world.camera.position.z << "\n";
-	std::cout << world.camera.look_at.x << " " << world.camera.look_at.y << " " << world.camera.look_at.z << "\n";
-	std::cout << world.camera.up.x << " " << world.camera.up.y << " " << world.camera.up.z << "\n";
-	std::cout << world.camera.projection.far << " " << world.camera.projection.near << " " << world.camera.projection.fov << "\n";
-	for (std::string fich: world.model.nomes_ficheiros_3d) {
-		std::cout << fich << " ";
-	}
-
-}
-
-void le_pontos(std::vector<std::string> ficheiros_3d) {
-	
-	;
-	std::string path = "..\\..\\3d\\";
-	
-
-	for (std::string s_fich : ficheiros_3d) {
-		std::ifstream fich(path+=s_fich);
-		path = "..\\..\\3d\\";
-		if (fich.is_open()) {
-			float x, y, z;
-			while (fich >> x >> y >> z) {
-				pontos.push_back(Ponto(x, y, z));
-			}
-			fich.close();
-		}
-		else {
-			std::cout << "Não foi possível abrir o ficheiro " << s_fich << "\n";
-		}
 
 
-	}
-}
-
-
-void imprime_pontos(std::vector<Ponto> pontos) {
-
-	for (Ponto p : pontos) {
-		std::cout << p.x << " " << p.y << " " << p.z << "\n";
-	}
-}
-
-
-	
 
 void renderScene(void)
 {
@@ -280,16 +262,18 @@ void renderScene(void)
 
 	//pontos
 	glBegin(GL_TRIANGLES);
-	for (Ponto p : pontos) {
-		glColor3f(1.0f, 1.0f, 1.0f);
-		glVertex3f(p.x, p.y, p.z);
+	for (Figura fig : figuras) {
+		for (Ponto p : fig.pontos) {
+			glColor3f(1.0f, 1.0f, 1.0f);
+			glVertex3f(p.x, p.y, p.z);
+		}
 	}
 	glEnd();
 
-	
+
 	//--------------------------------------
-	
-	
+
+
 
 
 
@@ -301,8 +285,8 @@ void renderScene(void)
 
 
 int main(int argc, char** argv)
-{   
-	
+{
+
 	std::ifstream fich("..\\..\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
 	std::string teste_xml;
 	WorldData world;
@@ -317,35 +301,28 @@ int main(int argc, char** argv)
 
 
 	parse_xml(teste_xml, world);
-	//imprime_xml(world);
-	le_pontos(ficheiros_3d);
-	//imprime_pontos(pontos);
 	
 
-
-
-	
-	
 	// put GLUT’s init here
 	glutInit(&argc, argv); //iniciar o glut
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA); //definir como queremos a janela
 	glutInitWindowPosition(100, 100); //posiçao da janela
 	glutInitWindowSize(width, height); //tamanho janela
 	glutCreateWindow("CG@TP"); //cria a janela com o nome
-	
+
 	// put callback registry here
 	glutReshapeFunc(changeSize); //chama uma funçao com 2 parametros width e height (changeSize)
 	glutIdleFunc(renderScene);   //chama a funçao renderScene quando puder
 	glutDisplayFunc(renderScene); //pintar a janela (argumento é o nome da funçao)
-	
+
 	// some OpenGL settings
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	
+
 	// enter GLUT’s main cycle
 	glutMainLoop(); //ciclo do glut; enquanto a janela nao for fechada chama o renderScene e processa eventos
-	
+
 
 	return 1;
 }
