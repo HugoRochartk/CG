@@ -74,19 +74,19 @@ void cria_caixa(float length, int divisions, std::string filename){
 
               str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
               str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
-              str_vertices << x2 << ' ' << y << ' ' << z1 << '\n';
+              str_vertices << x1 << ' ' << y << ' ' << z2 << '\n';
 
               str_vertices << x1 << ' ' << y << ' ' << z1 << '\n';
-              str_vertices << x1 << ' ' << y << ' ' << z2 << '\n';
+              str_vertices << x2 << ' ' << y << ' ' << z1 << '\n';
               str_vertices << x2 << ' ' << y << ' ' << z2 << '\n';
 
               str_vertices << x2 << ' ' << -y << ' ' << z2 << '\n';
               str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
-              str_vertices << x2 << ' ' << -y << ' ' << z1 << '\n';
-
               str_vertices << x1 << ' ' << -y << ' ' << z2 << '\n';
-              str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
+
               str_vertices << x2 << ' ' << -y << ' ' << z2 << '\n';
+              str_vertices << x2 << ' ' << -y << ' ' << z1 << '\n';
+              str_vertices << x1 << ' ' << -y << ' ' << z1 << '\n';
           }
       }
       
@@ -100,12 +100,12 @@ void cria_caixa(float length, int divisions, std::string filename){
               z2 = ((j + 1) * (length / divisions)) - (length / 2);
 
               str_vertices << x << ' ' << y2 << ' ' << z1 << '\n';
-              str_vertices << x << ' ' << y2 << ' ' << z2 << '\n';
               str_vertices << x << ' ' << y1 << ' ' << z1 << '\n';
+              str_vertices << x << ' ' << y2 << ' ' << z2 << '\n';
 
               str_vertices << x << ' ' << y1 << ' ' << z2 << '\n';
-              str_vertices << x << ' ' << y1 << ' ' << z1 << '\n';
               str_vertices << x << ' ' << y2 << ' ' << z2 << '\n';
+              str_vertices << x << ' ' << y1 << ' ' << z1 << '\n';
 
               str_vertices << -x << ' ' << y2 << ' ' << z1 << '\n';
               str_vertices << -x << ' ' << y2 << ' ' << z2 << '\n';
@@ -136,12 +136,12 @@ void cria_caixa(float length, int divisions, std::string filename){
               str_vertices << x2 << ' ' << y2 << ' ' << z << '\n';
 
               str_vertices << x2 << ' ' << y2 << ' ' << -z << '\n';
-              str_vertices << x1 << ' ' << y2 << ' ' << -z << '\n';
               str_vertices << x1 << ' ' << y1 << ' ' << -z << '\n';
+              str_vertices << x1 << ' ' << y2 << ' ' << -z << '\n';
 
               str_vertices << x1 << ' ' << y1 << ' ' << -z << '\n';
-              str_vertices << x2 << ' ' << y1 << ' ' << -z << '\n';
               str_vertices << x2 << ' ' << y2 << ' ' << -z << '\n';
+              str_vertices << x2 << ' ' << y1 << ' ' << -z << '\n';
 
           }
       }
