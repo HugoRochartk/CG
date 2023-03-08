@@ -253,6 +253,64 @@ void cria_plano(float length, int divisions, std::string filename){
 }
 
 
+void cria_cilindro(float radius, float height, int slices, int stacks, std::string filename) {
+    std::ofstream fich = cria_ficheiro_3d(filename);
+    std::stringstream str_vertices;
+
+
+
+    float alpha = (2 * M_PI) / slices;
+    float ratio = height/stacks;
+    float x1, x2, z1, z2;
+
+    for (int i = 0; i < slices; i++) {
+        x1 = radius * sin(i * alpha);
+        x2 = radius * sin((i + 1) * alpha);
+        z1 = radius * cos(i * alpha);
+        z2 = radius * cos((i + 1) * alpha);
+
+        str_vertices << 0 << ' ' << height << ' ' << 0 << '\n';
+        str_vertices << x1 << ' ' << height << ' ' << z1 << '\n';
+        str_vertices << x2 << ' ' << height << ' ' << z2 << '\n';
+    }
+
+
+    for (int i = 0; i < slices; i++) {
+        x1 = radius * sin(i * alpha);
+        x2 = radius * sin((i + 1) * alpha);
+        z1 = radius * cos(i * alpha);
+        z2 = radius * cos((i + 1) * alpha);
+
+        str_vertices << 0 << ' ' << 0 << ' ' << 0 << '\n';
+        str_vertices << x2 << ' ' << 0 << ' ' << z2 << '\n';
+        str_vertices << x1 << ' ' << 0 << ' ' << z1 << '\n';
+    }
+
+
+    for (int j = 0; j < stacks; j++) {
+        for (int i = 0; i < slices; i++) {
+
+            x1 = radius * sin(i * alpha);
+            x2 = radius * sin((i + 1) * alpha);
+            z1 = radius * cos(i * alpha);
+            z2 = radius * cos((i + 1) * alpha);
+
+            str_vertices << x1 << ' ' << ratio*(j+1) << ' ' << z1 << '\n';
+            str_vertices << x1 << ' ' << ratio*j << ' ' << z1 << '\n';
+            str_vertices << x2 << ' ' << ratio*j << ' ' << z2 << '\n';
+
+            str_vertices << x2 << ' ' << ratio*(j+1) << ' ' << z2 << '\n';
+            str_vertices << x1 << ' ' << ratio*(j+1) << ' ' << z1 << '\n';
+            str_vertices << x2 << ' ' << ratio*j << ' ' << z2 << '\n';
+
+
+        }
+    }
+
+    fich << str_vertices.str();
+    fich.close();
+}
+
 void menu(char **argv){
 
     if (!strcmp(argv[1], "sphere")){
@@ -267,6 +325,9 @@ void menu(char **argv){
     else if (!strcmp(argv[1], "plane")){
            cria_plano(std::stof(argv[2]), std::stoi(argv[3]), argv[4]);
     }
+    else if (!strcmp(argv[1], "cylinder")) {
+           cria_cilindro(std::stof(argv[2]), std::stof(argv[3]), std::stoi(argv[4]), std::stoi(argv[5]), argv[6]);
+    }
 
     else{
         printf("Incorrect syntax.\n");
@@ -274,7 +335,8 @@ void menu(char **argv){
         printf("generator sphere [radius] [slices] [stacks] [3d filename]\n");
         printf("generator cone [radius] [height] [slices] [stacks] [3d filename]\n");
         printf("generator box [dimension] [number of divs per edge] [3d filename]\n");
-        printf("generator plane [length] [divisions] [3d file name]");
+        printf("generator plane [length] [divisions] [3d file name]\n");
+        printf("generator cylinder [radius] [heigth] [slices] [stacks] [3d file name]\n");
     }
 
 
@@ -292,6 +354,7 @@ int main(int argc, char **argv){
 		printf("generator cone [radius] [height] [slices] [stacks] [3d filename]\n");
 		printf("generator box [dimension] [number of divs per edge] [3d filename]\n");
 		printf("generator plane [length] [divisions] [3d file name]");
+        printf("generator cylinder [radius] [heigth] [slices] [stacks] [3d file name]\n");
 	}
 
 	menu(argv);
