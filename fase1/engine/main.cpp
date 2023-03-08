@@ -36,12 +36,20 @@ void changeSize(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-float pos_x = 5.0f, pos_y = 5.0f, pos_z = 5.0f,
+
+float alfa = 0.0f, beta = 90.0f, radius = 5.0f;
+float pos_x, pos_y, pos_z,
 lookat_x = 0.0f, lookat_y = 0.0f, lookat_z = 0.0f,
 up_x = 0.0f, up_y = 1.0f, up_z = 0.0f;
 
 float width = 800, height = 800;
 
+
+void spherical2Cartesian() {
+	pos_x = radius * cos(beta) * sin(alfa);
+	pos_y = radius * sin(beta);
+	pos_z = radius * cos(beta) * cos(alfa);
+}
 
 struct Ponto {
 	float x;
@@ -283,6 +291,42 @@ void renderScene(void)
 
 }
 
+void processSpecialKeys(int key, int xx, int yy) {
+
+	switch (key) {
+	case GLUT_KEY_RIGHT:
+		alfa -= 0.1; 
+		break;
+
+	case GLUT_KEY_LEFT:
+		alfa += 0.1; 
+		break;
+
+	case GLUT_KEY_UP:
+		beta += 0.1f;
+		if (beta > 1.5f)
+			beta = 1.5f;
+		break;
+
+	case GLUT_KEY_DOWN:
+		beta -= 0.1f;
+		if (beta < -1.5f)
+			beta = -1.5f;
+		break;
+
+	case GLUT_KEY_PAGE_DOWN: radius -= 0.1f;
+		if (radius < 0.1f)
+			radius = 0.1f;
+		break;
+
+	case GLUT_KEY_PAGE_UP:
+		radius += 0.1f;
+		break;
+	}
+	spherical2Cartesian();
+	glutPostRedisplay();
+
+}
 
 int main(int argc, char** argv)
 {
@@ -314,6 +358,9 @@ int main(int argc, char** argv)
 	glutReshapeFunc(changeSize); //chama uma funçao com 2 parametros width e height (changeSize)
 	glutIdleFunc(renderScene);   //chama a funçao renderScene quando puder
 	glutDisplayFunc(renderScene); //pintar a janela (argumento é o nome da funçao)
+
+
+	glutSpecialFunc(processSpecialKeys);
 
 	// some OpenGL settings
 	glEnable(GL_DEPTH_TEST);
