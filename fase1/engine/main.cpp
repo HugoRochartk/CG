@@ -270,9 +270,9 @@ void renderScene(void)
 
 	//pontos
 	glBegin(GL_TRIANGLES);
+	glColor3f(1.0f, 1.0f, 1.0f);
 	for (Figura fig : figuras) {
 		for (Ponto p : fig.pontos) {
-			glColor3f(1.0f, 1.0f, 1.0f);
 			glVertex3f(p.x, p.y, p.z);
 		}
 	}
