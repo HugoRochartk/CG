@@ -1,0 +1,10 @@
+^C:\USERS\UTILIZADOR\DESKTOP\CG-PROJETO\FASE2\ENGINE\BUILD\CMAKEFILES\F4606444A52AFDDA3357874E59630187\GENERATE.STAMP.RULE
+setlocal
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase2/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase2/engine/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Utilizador/Desktop/CG-Projeto/fase2/engine/build/class1.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
