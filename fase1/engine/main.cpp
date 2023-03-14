@@ -148,7 +148,7 @@ std::vector<Ponto> armazena_pontos(std::string nome_fich) {
 }
 
 void parse_xml(const std::string& teste_xml, WorldData& data) {
-	std::string path = "..\\..\\tests\\test_files_phase_1\\";
+	std::string path = "..\\..\\tests\\";
 	path += teste_xml;
 	path += ".xml";
 
@@ -331,7 +331,7 @@ void processSpecialKeys(int key, int xx, int yy) {
 int main(int argc, char** argv)
 {
 
-	std::ifstream fich("..\\..\\tests\\test_files_phase_1\\testar_xml.txt", std::ios::in);
+	std::ifstream fich("..\\..\\tests\\testar_xml.txt", std::ios::in);
 	std::string teste_xml;
 	WorldData world;
 
