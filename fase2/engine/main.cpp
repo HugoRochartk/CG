@@ -422,6 +422,7 @@ void renderScene(void)
 void processSpecialKeys(int key, int xx, int yy) {
 
 	switch (key) {
+
 	case GLUT_KEY_RIGHT:
 		alfa -= 0.1; 
 		break;
@@ -456,6 +457,22 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 }
 
+
+void translate_camera_keyboard(unsigned char key, int x, int y) {
+	
+		if (key == 'q' || key == 'Q') {
+			pos_x -= 2;
+			lookat_x -= 2;
+			glutPostRedisplay();
+		}
+		else if (key == 'e' || key == 'E'){
+		    pos_x += 2;
+		    lookat_x += 2;
+		    glutPostRedisplay();
+
+	    }
+}
+
 int main(int argc, char** argv)
 {
 
@@ -486,6 +503,7 @@ int main(int argc, char** argv)
 	glutReshapeFunc(changeSize); //chama uma funçao com 2 parametros width e height (changeSize)
 	glutIdleFunc(renderScene);   //chama a funçao renderScene quando puder
 	glutDisplayFunc(renderScene); //pintar a janela (argumento é o nome da funçao)
+	glutKeyboardFunc(translate_camera_keyboard);
 
 
 	glutSpecialFunc(processSpecialKeys);
