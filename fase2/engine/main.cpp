@@ -6,6 +6,7 @@
 #include <string>
 #include <cstdio>
 #include <vector>
+#include <map>
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -125,20 +126,30 @@ struct Ponto {
 };
 
 
-struct Figura {
-	std::string nome_ficheiro_3d;
+struct Transfs_por_Fig {
 	std::vector<Transformacao> transfs;
-	std::vector<Ponto> pontos;
+	std::string nome_ficheiro_3d;
+	
 
 
-	Figura(std::string nick, std::vector<Transformacao> transfs_aux, std::vector<Ponto> pontos_aux) {
-		this->nome_ficheiro_3d = nick;
+	Transfs_por_Fig(std::vector<Transformacao> transfs_aux, std::string nick) {
 		this->transfs = transfs_aux;
-		this->pontos = pontos_aux;
+		this->nome_ficheiro_3d = nick;
 	}
 
 };
 
+
+struct FiguraData {
+	std::map<std::string, std::vector<Ponto>> pts_por_fig;
+
+
+	void Add_to_FiguraData(std::string nick, std::vector<Ponto> pts_aux) {
+		this->pts_por_fig[nick] = pts_aux;
+	}
+    
+	
+};
 
 
 struct WindowData {
@@ -184,7 +195,8 @@ struct WorldData {
 };
 
 
-std::vector<Figura> figuras;
+std::vector<Transfs_por_Fig> trfs_por_fig;
+FiguraData figs;
 
 std::vector<Ponto> armazena_pontos(std::string nome_fich) {
 
@@ -267,9 +279,10 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 		if (models) {
 			auto model = models->FirstChildElement("model");
 			while (model != nullptr) {
+				trfs_por_fig.push_back(Transfs_por_Fig(transfs, model->Attribute("file")));
 				std::vector<Ponto> aux;
 				aux = armazena_pontos(model->Attribute("file"));
-				figuras.push_back(Figura(model->Attribute("file"), transfs, aux));
+				figs.Add_to_FiguraData(model->Attribute("file"), aux);
 				model = model->NextSiblingElement("model");
 			}
 
@@ -392,13 +405,14 @@ void renderScene(void)
 	//pontos
 	
 	glColor3f(1.0f, 1.0f, 1.0f);
-	for (Figura fig : figuras) {
+	for (Transfs_por_Fig tpf : trfs_por_fig) {
+		std::string nick = tpf.nome_ficheiro_3d;
 		glPushMatrix();
-		for (Transformacao t : fig.transfs) {
+		for (Transformacao t : tpf.transfs) {
 			t.executa_transf();
 		}
 		glBegin(GL_TRIANGLES);
-		for (Ponto p : fig.pontos) {
+		for (Ponto p : figs.pts_por_fig[nick]) {
 			glVertex3f(p.x, p.y, p.z);
 		}
 		glEnd();
@@ -408,8 +422,6 @@ void renderScene(void)
 
 
 	//--------------------------------------
-
-
 
 
 
