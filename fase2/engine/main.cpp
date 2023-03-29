@@ -38,7 +38,7 @@ void changeSize(int w, int h)
 }
 
 
-float alfa = 0.0f, beta = 90.0f, radius = 5.0f;
+float alfa = 0.0f, beta = 90.0f, radius = 20.0f;
 float pos_x, pos_y, pos_z,
 lookat_x = 0.0f, lookat_y = 0.0f, lookat_z = 0.0f,
 up_x = 0.0f, up_y = 1.0f, up_z = 0.0f;
@@ -299,6 +299,10 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 	path += teste_xml;
 	path += ".xml";
 
+	if (teste_xml == "sistema_solar") {
+		radius = 100.0;
+	}
+
 	tinyxml2::XMLDocument doc;
 	if (doc.LoadFile(path.c_str()) != tinyxml2::XML_SUCCESS) {
 		std::cerr << "Falha ao abrir o ficheiro " << teste_xml << ".\n";
@@ -424,8 +428,6 @@ void renderScene(void)
 	//--------------------------------------
 
 
-
-
 	// End of frame
 	glutSwapBuffers();
 
@@ -472,18 +474,43 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 void translate_camera_keyboard(unsigned char key, int x, int y) {
 	
-		if (key == 'q' || key == 'Q') {
+		if (key == 'a' || key == 'A') {
 			pos_x -= 2;
 			lookat_x -= 2;
 			glutPostRedisplay();
 		}
-		else if (key == 'e' || key == 'E'){
+		else if (key == 'd' || key == 'D'){
 		    pos_x += 2;
 		    lookat_x += 2;
 		    glutPostRedisplay();
 
 	    }
+		else if (key == 'e' || key == 'E') {
+			pos_z -= 2;
+			lookat_z -= 2;
+			glutPostRedisplay();
+
+		}
+		else if (key == 'q' || key == 'Q') {
+			pos_z += 2;
+			lookat_z += 2;
+			glutPostRedisplay();
+
+		}
+		else if (key == 'w' || key == 'W') {
+			pos_y += 2;
+			lookat_y += 2;
+			glutPostRedisplay();
+
+		}
+		else if (key == 's' || key == 'S') {
+			pos_y -= 2;
+			lookat_y -= 2;
+			glutPostRedisplay();
+
+		}
 }
+
 
 int main(int argc, char** argv)
 {
