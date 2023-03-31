@@ -1,0 +1,110 @@
+<world> <!-- a world can have a camera, a window definition, and a single group -->
+    <window width="800" height="800" />
+    <camera> 
+        <position x="-200" y="75" z="100" />
+        <lookAt x="0" y="0" z="0" />
+        <up x="0" y="1" z="0" /> 
+        <projection fov="60" near="1" far="3000" /> 
+    </camera>
+    <group>
+        <group> <!-- Sol -->
+            <transform>
+                <scale x="10" y="10" z="10" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <group> <!-- Mercúrio -->
+            <transform>
+                <translate x="36.32" y="0" z="0" />
+                <scale x="0.35" y="0.35" z="0.35" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <group> <!-- Vénus -->
+            <transform>
+                <translate x="67.04" y="0" z="0" />
+                <scale x="0.87" y="0.87" z="0.87" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <group> <!-- Terra-->
+            <transform>
+                <translate x="93.12" y="0" z="0" />
+                <scale x="0.91" y="0.91" z="0.91" />
+            </transform>
+            <models>
+                 <model file="sphere.3d" />
+            </models>
+        </group>
+        <group> <!-- Lua -->
+            <transform>
+                <translate x="94.5" y="1" z="0" />
+                <rotate z="1" y="0" x="0" angle="45"/>
+                <scale x="0.25" y="0.25" z="0.25" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>  
+        <group> <!-- Marte -->
+            <transform>
+                <translate x="141.54" y="0" z="0" />
+                <scale x="0.49" y="0.49" z="0.49" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <group> <!-- Jupiter -->
+            <transform>
+                <translate x="484.2" y="0" z="0" />
+                <scale x="10.03" y="10.03" z="10.03" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+
+        <group> <!-- Saturno -->
+            <transform>
+                <translate x="892.05" y="0" z="0" />
+                <scale x="8.35" y="8.35" z="8.35" />
+            </transform>
+            <models>
+                 <model file="sphere.3d" />
+            </models>            
+        </group>
+        
+        
+        
+        <group> <!-- Urano -->
+            <transform>
+                <translate x="1785.97" y="0" z="0" />
+                <scale x="3.64" y="3.64" z="3.64" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>  
+        </group>
+        
+        
+        
+        <group> <!-- Netuno  -->
+            <transform>
+                <translate x="2800" y="0" z="0" />
+                <scale x="3.53" y="3.53" z="3.53" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+   
+        </group>
+        
+    </group>
+</world>
