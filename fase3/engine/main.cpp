@@ -65,7 +65,10 @@ struct Transformacao {
 	float x;
 	float y;
 	float z;
-	char flag;
+	float time;
+	bool align;
+	std::vector<float> pontos;
+	std::string flag;
 
 
 	Transformacao() {
@@ -73,7 +76,9 @@ struct Transformacao {
 		this->x = 0;
 		this->y = 0;
 		this->z = 0;
-		this->flag = 'x';
+		this->time = -1;
+		this->align = true;
+		this->flag = "nothing";
 	}
 
 
@@ -82,7 +87,20 @@ struct Transformacao {
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->flag = 't';
+		this->time = -1;
+		this->align = true;
+		this->flag = "t";
+	}
+
+	void Curva(float timei, bool aligni, std::vector<float> pontosi) {
+		this->angulo = 0;
+		this->x = 0;
+		this->y = 0;
+		this->z = 0;
+		this->time = timei;
+		this->align = aligni;
+		this->pontos = pontosi;
+		this->flag = "c";
 	}
 
 
@@ -91,7 +109,7 @@ struct Transformacao {
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->flag = 'e';
+		this->flag = "e";
 	}
 
 
@@ -100,18 +118,28 @@ struct Transformacao {
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->flag = 'r';
+		this->flag = "r";
+	}
+
+	void RotacaoTime(float xi, float yi, float zi, float timei) {
+		this->angulo = 0;
+		this->x = xi;
+		this->y = yi;
+		this->z = zi;
+		this->time = timei;
+		this->align = true;
+		this->flag = "rt";
 	}
 
 
 	void executa_transf() {
-		if (this->flag == 't') {
+		if (this->flag == "t") {
 			glTranslatef(this->x, this->y, this->z);
 		}
-		else if (this->flag == 'e') {
+		else if (this->flag == "e") {
 			glScalef(this->x, this->y, this->z);
 		}
-		else if (this->flag == 'r') {
+		else if (this->flag == "r") {
 			glRotatef(this->angulo, this->x, this->y, this->z);
 		}
 		else { ; }
