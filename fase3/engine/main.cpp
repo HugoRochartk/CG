@@ -59,6 +59,18 @@ void spherical2Cartesian() {
 	pos_z = radius * cos(beta) * cos(alfa);
 }
 
+struct Ponto {
+	float x;
+	float y;
+	float z;
+
+	//construtor:
+	Ponto(float xi, float yi, float zi) {
+		this->x = xi;
+		this->y = yi;
+		this->z = zi;
+	}
+};
 
 struct Transformacao {
 	float angulo;
@@ -67,7 +79,7 @@ struct Transformacao {
 	float z;
 	float time;
 	bool align;
-	std::vector<float> pontos;
+	std::vector<Ponto> pontos;
 	std::string flag;
 
 
@@ -92,7 +104,7 @@ struct Transformacao {
 		this->flag = "t";
 	}
 
-	void Curva(float timei, bool aligni, std::vector<float> pontosi) {
+	void Curva(float timei, bool aligni, std::vector<Ponto> pontosi) {
 		this->angulo = 0;
 		this->x = 0;
 		this->y = 0;
@@ -146,23 +158,18 @@ struct Transformacao {
 		else if (this->flag == "r") {
 			glRotatef(this->angulo, this->x, this->y, this->z);
 		}
+		else if (this->flag == "rt") {
+			this->angulo = (glutGet(GLUT_ELAPSED_TIME) * 360)/this->time;  //regra de 3 simples
+			glRotatef(this->angulo, this->x, this->y, this->z);
+		}
+		else if (this->flag == "c") {
+			;
+		}
 		else { ; }
 	}
 
 };
 
-struct Ponto {
-	float x;
-	float y;
-	float z;
-
-	//construtor:
-	Ponto(float xi, float yi, float zi) {
-		this->x = xi;
-		this->y = yi;
-		this->z = zi;
-	}
-};
 
 
 struct Transfs_por_Fig {
@@ -296,14 +303,33 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 				std::string nome = std::string(tipo_transf->Name());
 
 				if (nome == "translate") {
-					float x, y, z;
-					x = tipo_transf->FloatAttribute("x");
-					y = tipo_transf->FloatAttribute("y");
-					z = tipo_transf->FloatAttribute("z");
+					
+					if (tipo_transf->Attribute("time") != nullptr) {
+						std::vector<Ponto> pontos;
+						bool align = tipo_transf->BoolAttribute("align");
+						float time = tipo_transf->FloatAttribute("time");
+						tinyxml2::XMLElement* ponto = tipo_transf->FirstChildElement("point");
+						while (ponto != nullptr) {
+							float x = ponto->FloatAttribute("x");
+							float y = ponto->FloatAttribute("y");
+							float z = ponto->FloatAttribute("z");
+							pontos.push_back(Ponto(x, y, z));
+							ponto = ponto->NextSiblingElement("point");
+						}
+						Transformacao nt = Transformacao();
+						nt.Curva(time, align, pontos);
+						transfs.push_back(nt);		
+					}
+					else {
+						float x, y, z;
+						x = tipo_transf->FloatAttribute("x");
+						y = tipo_transf->FloatAttribute("y");
+						z = tipo_transf->FloatAttribute("z");
 
-					Transformacao nt = Transformacao();
-					nt.Translacao(x, y, z);
-					transfs.push_back(nt);
+						Transformacao nt = Transformacao();
+						nt.Translacao(x, y, z);
+						transfs.push_back(nt);
+					}
 				}
 
 				else if (nome == "scale") {
@@ -318,15 +344,24 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 				}
 
 				else if (nome == "rotate") {
-					float x, y, z, angle;
-					angle = tipo_transf->FloatAttribute("angle");
-					x = tipo_transf->FloatAttribute("x");
-					y = tipo_transf->FloatAttribute("y");
-					z = tipo_transf->FloatAttribute("z");
+					float x = tipo_transf->FloatAttribute("x");
+					float y = tipo_transf->FloatAttribute("y");
+					float z = tipo_transf->FloatAttribute("z");
+					if (tipo_transf->Attribute("time") != nullptr) {
+						float time = tipo_transf->FloatAttribute("time");
 
-					Transformacao nt = Transformacao();
-					nt.Rotacao(angle, x, y, z);
-					transfs.push_back(nt);
+						Transformacao nt = Transformacao();
+						nt.RotacaoTime(x, y, z, time);
+						transfs.push_back(nt);
+					}
+					else {
+						float angle;
+						angle = tipo_transf->FloatAttribute("angle");
+
+						Transformacao nt = Transformacao();
+						nt.Rotacao(angle, x, y, z);
+						transfs.push_back(nt);
+					}
 				}
 				else {
 					;

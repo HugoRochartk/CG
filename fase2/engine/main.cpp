@@ -237,6 +237,7 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 				std::string nome = std::string(tipo_transf->Name());
 
 				if (nome == "translate") {
+
 					float x, y, z;
 					x = tipo_transf->FloatAttribute("x");
 					y = tipo_transf->FloatAttribute("y");
