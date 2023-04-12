@@ -245,9 +245,6 @@ void cria_plano(float length, int divisions, std::string filename) {
 
 
     fich << str_vertices.str();
-
-
-
     fich.close();
 
 }
@@ -311,6 +308,17 @@ void cria_cilindro(float radius, float height, int slices, int stacks, std::stri
     fich.close();
 }
 
+void cria_curva_bezier(std::string patch_filename, int tesselation_level, std::string triangles_filename) {
+    std::ofstream fich = cria_ficheiro_3d(triangles_filename);
+    std::stringstream str_vertices;
+
+    //boa sorte
+
+
+    fich << str_vertices.str();
+    fich.close();
+}
+
 void menu(char** argv) {
 
     if (!strcmp(argv[1], "sphere")) {
@@ -328,6 +336,10 @@ void menu(char** argv) {
     else if (!strcmp(argv[1], "cylinder")) {
         cria_cilindro(std::stof(argv[2]), std::stof(argv[3]), std::stoi(argv[4]), std::stoi(argv[5]), argv[6]);
     }
+    else if (!strcmp(argv[1], "patch")) {
+        cria_curva_bezier(argv[2], std::stoi(argv[3]), argv[4]);
+    }
+
 
     else {
         printf("Incorrect syntax.\n");
@@ -337,6 +349,7 @@ void menu(char** argv) {
         printf("generator box [dimension] [number of divs per edge] [3d filename]\n");
         printf("generator plane [length] [divisions] [3d file name]\n");
         printf("generator cylinder [radius] [heigth] [slices] [stacks] [3d file name]\n");
+        printf("generator patch [patch filename] [tesselation level] [3d file name]\n");
     }
 
 
@@ -355,6 +368,7 @@ int main(int argc, char** argv) {
         printf("generator box [dimension] [number of divs per edge] [3d filename]\n");
         printf("generator plane [length] [divisions] [3d file name]");
         printf("generator cylinder [radius] [heigth] [slices] [stacks] [3d file name]\n");
+        printf("generator patch [patch filename] [tesselation level] [3d file name]\n");
     }
 
     menu(argv);

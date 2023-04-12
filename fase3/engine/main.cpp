@@ -104,7 +104,7 @@ struct Transformacao {
 		this->flag = "t";
 	}
 
-	void Curva(float timei, bool aligni, std::vector<Ponto> pontosi) {
+	void CatmullRom(float timei, bool aligni, std::vector<Ponto> pontosi) {
 		this->angulo = 0;
 		this->x = 0;
 		this->y = 0;
@@ -163,7 +163,7 @@ struct Transformacao {
 			glRotatef(this->angulo, this->x, this->y, this->z);
 		}
 		else if (this->flag == "c") {
-			;
+			;//boa sorte
 		}
 		else { ; }
 	}
@@ -317,7 +317,7 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 							ponto = ponto->NextSiblingElement("point");
 						}
 						Transformacao nt = Transformacao();
-						nt.Curva(time, align, pontos);
+						nt.CatmullRom(time, align, pontos);
 						transfs.push_back(nt);		
 					}
 					else {
