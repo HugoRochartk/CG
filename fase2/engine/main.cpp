@@ -14,13 +14,14 @@
 #include <GL/glut.h>
 #endif
 
+
 float fov = 45.0, near = 1.0f, far = 1000.0f;
 
 
 void changeSize(int w, int h)
 {
 	// Prevent a divide by zero, when window is too short
-	// (you can’t make a window with zero width).
+	// (you canâ€™t make a window with zero width).
 	if (h == 0)
 		h = 1;
 	// compute window's aspect ratio
@@ -217,7 +218,7 @@ std::vector<Ponto> armazena_pontos(std::string nome_fich) {
 		fich.close();
 	}
 	else {
-		std::cout << "Não foi possível abrir o ficheiro " << nome_fich << ".\n";
+		std::cout << "NÃ£o foi possÃ­vel abrir o ficheiro " << nome_fich << ".\n";
 	}
 
 	return res;
@@ -527,24 +528,24 @@ int main(int argc, char** argv)
 		fich.close();
 	}
 	else {
-		std::cout << "Não foi possível abrir o ficheiro testar_xml.txt.\n";
+		std::cout << "NÃ£o foi possÃ­vel abrir o ficheiro testar_xml.txt.\n";
 	}
 
 
 	parse_xml(teste_xml, world);
 	
 
-	// put GLUT’s init here
+	// put GLUTâ€™s init here
 	glutInit(&argc, argv); //iniciar o glut
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA); //definir como queremos a janela
-	glutInitWindowPosition(100, 100); //posiçao da janela
+	glutInitWindowPosition(100, 100); //posiÃ§ao da janela
 	glutInitWindowSize(width, height); //tamanho janela
 	glutCreateWindow("CG@TP"); //cria a janela com o nome
 
 	// put callback registry here
-	glutReshapeFunc(changeSize); //chama uma funçao com 2 parametros width e height (changeSize)
-	glutIdleFunc(renderScene);   //chama a funçao renderScene quando puder
-	glutDisplayFunc(renderScene); //pintar a janela (argumento é o nome da funçao)
+	glutReshapeFunc(changeSize); //chama uma funÃ§ao com 2 parametros width e height (changeSize)
+	glutIdleFunc(renderScene);   //chama a funÃ§ao renderScene quando puder
+	glutDisplayFunc(renderScene); //pintar a janela (argumento Ã© o nome da funÃ§ao)
 	glutKeyboardFunc(translate_camera_keyboard);
 
 
@@ -555,7 +556,7 @@ int main(int argc, char** argv)
 	glEnable(GL_CULL_FACE);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-	// enter GLUT’s main cycle
+	// enter GLUTâ€™s main cycle
 	glutMainLoop(); //ciclo do glut; enquanto a janela nao for fechada chama o renderScene e processa eventos
 
 
