@@ -145,7 +145,9 @@ struct FiguraData {
 
 
 	void Add_to_FiguraData(std::string nick, std::vector<Ponto> pts_aux) {
-		this->pts_por_fig[nick] = pts_aux;
+		if (this->pts_por_fig.find(nick) == this->pts_por_fig.end()) {
+			this->pts_por_fig[nick] = pts_aux;
+		}
 	}
     
 	

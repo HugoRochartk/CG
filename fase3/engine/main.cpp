@@ -109,6 +109,8 @@ struct Transformacao {
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
+		this->time = -1;
+		this->align = true;
 		this->flag = "e";
 	}
 
@@ -118,6 +120,8 @@ struct Transformacao {
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
+		this->time = -1;
+		this->align = true;
 		this->flag = "r";
 	}
 
@@ -182,7 +186,9 @@ struct FiguraData {
 	
 
 	void Add_to_FiguraData(std::string nick, std::vector<Ponto> pts_aux) {
-		this->pts_por_fig[nick] = pts_aux;
+		if (this->pts_por_fig.find(nick) == this->pts_por_fig.end()) { 
+			this->pts_por_fig[nick] = pts_aux;
+		}
 	}
 
     
@@ -618,7 +624,6 @@ int main(int argc, char** argv)
 		glBufferData(GL_ARRAY_BUFFER, pair.second.size()*3 * sizeof(float), points, GL_STATIC_DRAW);
 		i++;
 	}
-
 
 	// some OpenGL settings
 	glEnable(GL_DEPTH_TEST);
