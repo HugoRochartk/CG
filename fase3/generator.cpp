@@ -4,6 +4,23 @@
 #include <string>
 #include <string.h>
 #include <math.h>
+#include <map>
+#include <vector>
+
+
+struct Ponto {
+    float x = 0;
+    float y = 0;
+    float z = 0;
+
+    //construtor:
+    void set_coords(float xi, float yi, float zi) {
+        this->x = xi;
+        this->y = yi;
+        this->z = zi;
+    }
+};
+
 
 std::ofstream cria_ficheiro_3d(std::string s) {
     std::ofstream fich;
@@ -308,13 +325,66 @@ void cria_cilindro(float radius, float height, int slices, int stacks, std::stri
     fich.close();
 }
 
+std::ifstream abre_ficheiro_patch(std::string filename) {
+    std::string path = "patch//";
+    path += filename;
+    std::ifstream fich(path);
+    if (!fich.is_open()) { 
+        printf("Não foi possível abrir o ficheiro patch.\n");
+    }
+    return fich;
+}
+
 void cria_curva_bezier(std::string patch_filename, int tesselation_level, std::string triangles_filename) {
     std::ofstream fich = cria_ficheiro_3d(triangles_filename);
+    std::ifstream patch = abre_ficheiro_patch(patch_filename);
     std::stringstream str_vertices;
+    int num_patches; int num_pontos;
+    int indice;
+    char virgula;
+    std::map<int, std::vector<int>> patchnr_indices;
+    std::map<int, Ponto> pontonr_ponto;
+    std::map<int, std::vector<Ponto>> patchnr_pontos;
+
+    patch >> num_patches;
+    for (int i = 0; i < num_patches; i++) {
+        std::vector<int> indices;
+        for (int j = 0; j < 16; j++) {
+            patch >> indice;
+            if (j != 15) {
+                patch >> virgula;
+            }
+            indices.push_back(indice);
+        }
+        patchnr_indices[i] = indices;
+    }
+    
+    float x, y, z;
+    patch >> num_pontos;
+    for (int i = 0; i < num_pontos; i++) {
+        patch >> x; patch >> virgula; patch >> y; patch >> virgula; patch >> z;
+        Ponto p; p.set_coords(x, y, z); 
+        pontonr_ponto[i] = p;
+    }
+
+    
+    for (int i=0; i < num_patches; i++){
+        std::vector<Ponto> pontos;
+        for (int ind : patchnr_indices[i]) {
+            pontos.push_back(pontonr_ponto[ind]);
+        }
+        patchnr_pontos[i] = pontos;
+    }
 
     //boa sorte
-
-
+    /*
+    for (std::pair<int, std::vector<Ponto>> pair : patchnr_pontos) {
+        std::cout << pair.first << "; ";
+        for (Ponto p : pair.second) {
+            std::cout << p.x << " " << p.y << " " << p.z << "\n";
+        }
+    }*/
+    
     fich << str_vertices.str();
     fich.close();
 }
