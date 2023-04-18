@@ -335,6 +335,35 @@ std::ifstream abre_ficheiro_patch(std::string filename) {
     return fich;
 }
 
+void MxM(float M1[4][4], float M2[4][4], float res[4][4]) { // res = M1M2
+    int val;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4: j++) {
+            val = 0;
+            for (int k = 0; k < 4; k++) {
+                val += (M1[i][k] * M2[k][j])
+            }
+            res[i][j] = val;
+        }
+    }  
+}
+
+void constroi_matrizes_xyz(std::vector<Ponto> pontos, float xMatrix[4][4], float yMatrix[4][4], float zMatrix[4][4]) {
+
+    int ind = 0;
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4: j++) {
+            xMatrix[j][i] = pontos[ind].x;
+            yMatrix[j][i] = pontos[ind].y;
+            zMatrix[j][i] = pontos[ind].z;
+            ind++;
+        }
+    }
+
+}
+
+
 void cria_curva_bezier(std::string patch_filename, int tesselation_level, std::string triangles_filename) {
     std::ofstream fich = cria_ficheiro_3d(triangles_filename);
     std::ifstream patch = abre_ficheiro_patch(patch_filename);
@@ -376,14 +405,26 @@ void cria_curva_bezier(std::string patch_filename, int tesselation_level, std::s
         patchnr_pontos[i] = pontos;
     }
 
-    //boa sorte
-    /*
-    for (std::pair<int, std::vector<Ponto>> pair : patchnr_pontos) {
-        std::cout << pair.first << "; ";
-        for (Ponto p : pair.second) {
-            std::cout << p.x << " " << p.y << " " << p.z << "\n";
-        }
-    }*/
+    float xMatrix[4][4], yMatrix[4][4], zMatrix[4][4];
+    float BezierMatrix[4][4] = { 
+                                 { -1,  3, -3, 1},
+                                 {  3, -6,  3, 0},
+                                 { -3,  3,  0, 0},
+                                 {  1,  0,  0, 0} 
+                               };
+    float matriz_intermedia[4][4];
+
+    for (std::pair<int, std::vector<Ponto>> par : patchnr_pontos) {
+        constroi_matrizes_xyz(par.second, xMatrix, yMatrix, zMatrix);
+        MxM(BezierMatrix, xMatrix, matriz_intermedia);
+        MxM(matriz_intermedia, BezierMatrix, xMatrix); //BezierMatrixTransposta = BezierMatrix
+        MxM(BezierMatrix, yMatrix, matriz_intermedia);
+        MxM(matriz_intermedia, BezierMatrix, yMatrix);
+        MxM(BezierMatrix, zMatrix, matriz_intermedia);
+        MxM(matriz_intermedia, BezierMatrix, zMatrix);
+
+
+    }
     
     fich << str_vertices.str();
     fich.close();
