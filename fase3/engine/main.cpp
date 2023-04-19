@@ -72,6 +72,139 @@ struct Ponto {
 	}
 };
 
+void buildRotMatrix(float* x, float* y, float* z, float* m) {
+
+	m[0] = x[0]; m[1] = x[1]; m[2] = x[2]; m[3] = 0;
+	m[4] = y[0]; m[5] = y[1]; m[6] = y[2]; m[7] = 0;
+	m[8] = z[0]; m[9] = z[1]; m[10] = z[2]; m[11] = 0;
+	m[12] = 0; m[13] = 0; m[14] = 0; m[15] = 1;
+}
+
+
+void cross(float* a, float* b, float* res) {
+
+	res[0] = a[1] * b[2] - a[2] * b[1];
+	res[1] = a[2] * b[0] - a[0] * b[2];
+	res[2] = a[0] * b[1] - a[1] * b[0];
+}
+
+
+void normalize(float* a) {
+
+	float l = sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
+	a[0] = a[0] / l;
+	a[1] = a[1] / l;
+	a[2] = a[2] / l;
+}
+
+
+float length(float* v) {
+
+	float res = sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+	return res;
+
+}
+
+void multMatrixVector(float* m, float* v, float* res) {
+
+	for (int j = 0; j < 4; ++j) {
+		res[j] = 0;
+		for (int k = 0; k < 4; ++k) {
+			res[j] += v[k] * m[j * 4 + k];
+		}
+	}
+
+}
+
+
+float multVectorVector(float* v1, float* v2) {
+	float res = 0;
+
+	for (int i = 0; i < 4; i++) {
+		res += (v1[i] * v2[i]);
+	}
+
+	return res;
+
+
+}
+
+float* Ponto_to_float_pointer(Ponto p) {
+	float res[3];
+
+	res[0] = p.x;
+	res[1] = p.y;
+	res[2] = p.z;
+
+	return (float*)res;
+}
+
+void getCatmullRomPoint(float t, float* p0, float* p1, float* p2, float* p3, float* pos, float* deriv) {
+
+	// catmull-rom matrix
+	float m[4][4] = { {-0.5f,  1.5f, -1.5f,  0.5f},
+						{ 1.0f, -2.5f,  2.0f, -0.5f},
+						{-0.5f,  0.0f,  0.5f,  0.0f},
+						{ 0.0f,  1.0f,  0.0f,  0.0f} };
+
+	float A[4];
+	float mt[4] = { pow(t,3), pow(t,2), t, 1 };
+	float t_deriv[4] = { 3 * (pow(t,2)), 2 * t, 1, 0 };
+
+	// Compute A = M * P
+	for (int i = 0; i < 3; ++i) {
+		float p[4] = { p0[i], p1[i], p2[i], p3[i] };
+		multMatrixVector((float*)m, (float*)p, (float*)A);
+
+		// Compute pos = T * A
+		pos[i] = multVectorVector((float*)mt, (float*)A);
+
+		// compute deriv = T' * A
+		deriv[i] = multVectorVector((float*)t_deriv, (float*)A);
+
+	}
+
+	// ...
+}
+
+
+// given  global t, returns the point in the curve
+void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, std::vector<Ponto> p) {
+
+	int POINT_COUNT = p.size();
+	float t = gt * POINT_COUNT; // this is the real global t
+	int index = floor(t);  // which segment
+	t = t - index; // where within  the segment
+
+	// indices store the points
+	int indices[4];
+	indices[0] = (index + POINT_COUNT - 1) % POINT_COUNT;
+	indices[1] = (indices[0] + 1) % POINT_COUNT;
+	indices[2] = (indices[1] + 1) % POINT_COUNT;
+	indices[3] = (indices[2] + 1) % POINT_COUNT;
+
+	getCatmullRomPoint(t, Ponto_to_float_pointer(p[indices[0]]), Ponto_to_float_pointer(p[indices[1]]), Ponto_to_float_pointer(p[indices[2]]), Ponto_to_float_pointer(p[indices[3]]), pos, deriv);
+}
+
+
+void renderCatmullRomCurve(std::vector<Ponto> p) {
+
+	float t = 0.01;
+	// draw curve using line segments with GL_LINE_LOOP
+	float pos[3], deriv[3];
+	glBegin(GL_LINE_LOOP);
+	for (float i = 0; i <= 1; i += t) {
+		getGlobalCatmullRomPoint(i, (float*)pos, (float*)deriv, p);
+		glVertex3f(pos[0], pos[1], pos[2]);
+	}
+	glEnd();
+
+}
+
+
+
+float y_aux[3] = { 0, 1, 0 };
+
 struct Transformacao {
 	float angulo;
 	float x;
@@ -88,28 +221,19 @@ struct Transformacao {
 		this->x = 0;
 		this->y = 0;
 		this->z = 0;
-		this->time = -1;
-		this->align = true;
-		this->flag = "nothing";
+		this->flag = "undef";
 	}
 
 
 	void Translacao(float xi, float yi, float zi) {
-		this->angulo = 0;
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->time = -1;
-		this->align = true;
 		this->flag = "t";
 	}
 
 	void CatmullRom(float timei, bool aligni, std::vector<Ponto> pontosi) {
-		this->angulo = 0;
-		this->x = 0;
-		this->y = 0;
-		this->z = 0;
-		this->time = timei;
+		this->time = timei*1000;
 		this->align = aligni;
 		this->pontos = pontosi;
 		this->flag = "c";
@@ -117,12 +241,9 @@ struct Transformacao {
 
 
 	void Escala(float xi, float yi, float zi) {
-		this->angulo = 0;
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->time = -1;
-		this->align = true;
 		this->flag = "e";
 	}
 
@@ -132,20 +253,19 @@ struct Transformacao {
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->time = -1;
-		this->align = true;
 		this->flag = "r";
+		
 	}
 
 	void RotacaoTime(float xi, float yi, float zi, float timei) {
-		this->angulo = 0;
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->time = timei;
-		this->align = true;
+		this->time = timei*1000;
 		this->flag = "rt";
+		
 	}
+
 
 
 	void executa_transf() {
@@ -163,7 +283,44 @@ struct Transformacao {
 			glRotatef(this->angulo, this->x, this->y, this->z);
 		}
 		else if (this->flag == "c") {
-			;//boa sorte
+
+			static float t = 0;
+			static float time_atual = 0;
+		
+			renderCatmullRomCurve(this->pontos);
+
+			float pos[3], deriv[3];
+			getGlobalCatmullRomPoint(t, (float*)pos, (float*)deriv, this->pontos);
+
+			glTranslatef(pos[0], pos[1], pos[2]);
+			if (this->align == true) {
+
+				float y[3];
+				float z[3];
+
+				normalize((float*)deriv);
+
+				cross((float*)deriv, (float*)(y_aux), (float*)z);
+				normalize((float*)z);
+
+
+				cross((float*)z, (float*)deriv, (float*)y);
+				normalize((float*)y);
+				
+				for (int i = 0; i < 3; i++)
+					y_aux[i] = y[i];
+
+				float rotMatrix[16];
+				buildRotMatrix((float*)deriv, (float*)y, (float*)z, (float*)rotMatrix);
+				glMultMatrixf((float*)rotMatrix);
+
+
+			}
+			float prox_time = glutGet(GLUT_ELAPSED_TIME);
+			float ratio = prox_time - time_atual;
+			t += (ratio / (this->time));
+			time_atual = prox_time;
+			
 		}
 		else { ; }
 	}
@@ -474,7 +631,7 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 
 void renderScene(void)
 {
-
+	
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa  a cor
 
@@ -484,7 +641,7 @@ void renderScene(void)
 		lookat_x, lookat_y, lookat_z,
 		up_x, up_y, up_z);
 
-	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	// put drawing instructions here
 	//eixos
@@ -525,6 +682,7 @@ void renderScene(void)
 
 	// End of frame
 	glutSwapBuffers();
+	
 
 }
 
@@ -662,8 +820,8 @@ int main(int argc, char** argv)
 
 	// some OpenGL settings
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	//glEnable(GL_CULL_FACE);
+	//glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// enter GLUT’s main cycle
 	glutMainLoop(); //ciclo do glut; enquanto a janela nao for fechada chama o renderScene e processa eventos

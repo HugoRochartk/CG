@@ -338,14 +338,26 @@ std::ifstream abre_ficheiro_patch(std::string filename) {
 void MxM(float M1[4][4], float M2[4][4], float res[4][4]) { // res = M1M2
     int val;
     for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4: j++) {
+        for (int j = 0; j < 4; j++) {
             val = 0;
             for (int k = 0; k < 4; k++) {
-                val += (M1[i][k] * M2[k][j])
+                val += (M1[i][k] * M2[k][j]);
             }
             res[i][j] = val;
         }
     }  
+}
+
+float VxV(float* v1, float* v2) {
+    float res = 0;
+
+    for (int i = 0; i < 4; i++) {
+        res += (v1[i] * v2[i]);
+    }
+
+    return res;
+
+
 }
 
 void constroi_matrizes_xyz(std::vector<Ponto> pontos, float xMatrix[4][4], float yMatrix[4][4], float zMatrix[4][4]) {
@@ -353,7 +365,7 @@ void constroi_matrizes_xyz(std::vector<Ponto> pontos, float xMatrix[4][4], float
     int ind = 0;
 
     for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4: j++) {
+        for (int j = 0; j < 4; j++) {
             xMatrix[j][i] = pontos[ind].x;
             yMatrix[j][i] = pontos[ind].y;
             zMatrix[j][i] = pontos[ind].z;
