@@ -53,6 +53,10 @@ up_x = 0.0f, up_y = 1.0f, up_z = 0.0f;
 float width = 800, height = 800;
 
 
+
+std::map<std::vector<float>, float> map_t;
+std::map<std::vector<float>, float> map_times_atual;
+
 void spherical2Cartesian() {
 	pos_x = radius * cos(beta) * sin(alfa);
 	pos_y = radius * sin(beta);
@@ -201,7 +205,17 @@ void renderCatmullRomCurve(std::vector<Ponto> p) {
 
 }
 
+std::vector<float> pointvector_to_floatvector(std::vector<Ponto> pontos) {
 
+	std::vector<float> res;
+
+	for (Ponto p : pontos) {
+		res.push_back(p.x);
+		res.push_back(p.y);
+		res.push_back(p.z);
+	}
+	return res;
+}
 
 float y_aux[3] = { 0, 1, 0 };
 
@@ -233,9 +247,11 @@ struct Transformacao {
 	}
 
 	void CatmullRom(float timei, bool aligni, std::vector<Ponto> pontosi) {
-		this->time = timei * 1000;
 		this->align = aligni;
 		this->pontos = pontosi;
+		this->time = timei*1000;
+		map_t[pointvector_to_floatvector(pontosi)] = 0;
+		map_times_atual[pointvector_to_floatvector(pontosi)] = 0;
 		this->flag = "c";
 	}
 
@@ -284,13 +300,10 @@ struct Transformacao {
 		}
 		else if (this->flag == "c") {
 
-			static float t = 0;
-			static float time_atual = 0;
-
 			renderCatmullRomCurve(this->pontos);
 
 			float pos[3], deriv[3];
-			getGlobalCatmullRomPoint(t, (float*)pos, (float*)deriv, this->pontos);
+			getGlobalCatmullRomPoint(map_t[pointvector_to_floatvector(this->pontos)] , (float*)pos, (float*)deriv, this->pontos);
 
 			glTranslatef(pos[0], pos[1], pos[2]);
 			if (this->align == true) {
@@ -316,10 +329,11 @@ struct Transformacao {
 
 
 			}
+			
 			float prox_time = glutGet(GLUT_ELAPSED_TIME);
-			float ratio = prox_time - time_atual;
-			t += (ratio / (this->time));
-			time_atual = prox_time;
+			float ratio = prox_time - map_times_atual[pointvector_to_floatvector(this->pontos)];
+			map_t[pointvector_to_floatvector(this->pontos)] += (ratio / this->time);
+			map_times_atual[pointvector_to_floatvector(this->pontos)] = prox_time;
 
 		}
 		else { ; }
