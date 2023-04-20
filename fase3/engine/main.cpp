@@ -233,7 +233,7 @@ struct Transformacao {
 	}
 
 	void CatmullRom(float timei, bool aligni, std::vector<Ponto> pontosi) {
-		this->time = timei*1000;
+		this->time = timei * 1000;
 		this->align = aligni;
 		this->pontos = pontosi;
 		this->flag = "c";
@@ -254,16 +254,16 @@ struct Transformacao {
 		this->y = yi;
 		this->z = zi;
 		this->flag = "r";
-		
+
 	}
 
 	void RotacaoTime(float xi, float yi, float zi, float timei) {
 		this->x = xi;
 		this->y = yi;
 		this->z = zi;
-		this->time = timei*1000;
+		this->time = timei * 1000;
 		this->flag = "rt";
-		
+
 	}
 
 
@@ -279,14 +279,14 @@ struct Transformacao {
 			glRotatef(this->angulo, this->x, this->y, this->z);
 		}
 		else if (this->flag == "rt") {
-			this->angulo = (glutGet(GLUT_ELAPSED_TIME) * 360)/this->time;  //regra de 3 simples
+			this->angulo = (glutGet(GLUT_ELAPSED_TIME) * 360) / this->time;  //regra de 3 simples
 			glRotatef(this->angulo, this->x, this->y, this->z);
 		}
 		else if (this->flag == "c") {
 
 			static float t = 0;
 			static float time_atual = 0;
-		
+
 			renderCatmullRomCurve(this->pontos);
 
 			float pos[3], deriv[3];
@@ -306,7 +306,7 @@ struct Transformacao {
 
 				cross((float*)z, (float*)deriv, (float*)y);
 				normalize((float*)y);
-				
+
 				for (int i = 0; i < 3; i++)
 					y_aux[i] = y[i];
 
@@ -320,7 +320,7 @@ struct Transformacao {
 			float ratio = prox_time - time_atual;
 			t += (ratio / (this->time));
 			time_atual = prox_time;
-			
+
 		}
 		else { ; }
 	}
@@ -332,7 +332,7 @@ struct Transformacao {
 struct Transfs_por_Fig {
 	std::vector<Transformacao> transfs;
 	std::string nome_ficheiro_3d;
-	
+
 
 
 	Transfs_por_Fig(std::vector<Transformacao> transfs_aux, std::string nick) {
@@ -346,17 +346,17 @@ struct Transfs_por_Fig {
 struct FiguraData {
 	std::map<std::string, std::vector<Ponto>> pts_por_fig;
 	std::map<std::string, GLuint> indices;
-	
-	
+
+
 
 	void Add_to_FiguraData(std::string nick, std::vector<Ponto> pts_aux) {
-		if (this->pts_por_fig.find(nick) == this->pts_por_fig.end()) { 
+		if (this->pts_por_fig.find(nick) == this->pts_por_fig.end()) {
 			this->pts_por_fig[nick] = pts_aux;
 		}
 	}
 
-    
-	
+
+
 };
 
 
@@ -456,11 +456,11 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 
 		if (transf) {
 			tinyxml2::XMLElement* tipo_transf = transf->FirstChildElement();
-			while(tipo_transf) {
+			while (tipo_transf) {
 				std::string nome = std::string(tipo_transf->Name());
 
 				if (nome == "translate") {
-					
+
 					if (tipo_transf->Attribute("time") != nullptr) {
 						std::vector<Ponto> pontos;
 						bool align = tipo_transf->BoolAttribute("align");
@@ -475,7 +475,7 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 						}
 						Transformacao nt = Transformacao();
 						nt.CatmullRom(time, align, pontos);
-						transfs.push_back(nt);		
+						transfs.push_back(nt);
 					}
 					else {
 						float x, y, z;
@@ -540,12 +540,12 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 			}
 
 		}
-		
+
 		parse_group(g->FirstChildElement("group"), transfs);
 		g = g->NextSiblingElement("group");
 	}
-	
-	
+
+
 }
 
 void parse_xml(const std::string& teste_xml, WorldData& data) {
@@ -564,7 +564,7 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 	}
 
 	tinyxml2::XMLElement* world = doc.FirstChildElement("world");
-	
+
 	// Read window data
 	tinyxml2::XMLElement* window = world->FirstChildElement("window");
 	if (window) {
@@ -631,7 +631,7 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 
 void renderScene(void)
 {
-	
+
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa  a cor
 
@@ -661,7 +661,7 @@ void renderScene(void)
 	glEnd();
 
 	//pontos
-	
+
 	glColor3f(1.0f, 1.0f, 1.0f);
 	for (Transfs_por_Fig tpf : trfs_por_fig) {
 		std::string nick = tpf.nome_ficheiro_3d;
@@ -674,7 +674,7 @@ void renderScene(void)
 		glDrawArrays(GL_TRIANGLES, 0, figs.pts_por_fig[nick].size() * 3);
 		glPopMatrix();
 	}
-	
+
 
 
 	//--------------------------------------
@@ -682,7 +682,7 @@ void renderScene(void)
 
 	// End of frame
 	glutSwapBuffers();
-	
+
 
 }
 
@@ -691,11 +691,11 @@ void processSpecialKeys(int key, int xx, int yy) {
 	switch (key) {
 
 	case GLUT_KEY_RIGHT:
-		alfa -= 0.1; 
+		alfa -= 0.1;
 		break;
 
 	case GLUT_KEY_LEFT:
-		alfa += 0.1; 
+		alfa += 0.1;
 		break;
 
 	case GLUT_KEY_UP:
@@ -726,42 +726,42 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 
 void translate_camera_keyboard(unsigned char key, int x, int y) {
-	
-		if (key == 'a' || key == 'A') {
-			pos_x -= 2;
-			lookat_x -= 2;
-			glutPostRedisplay();
-		}
-		else if (key == 'd' || key == 'D'){
-		    pos_x += 2;
-		    lookat_x += 2;
-		    glutPostRedisplay();
 
-	    }
-		else if (key == 'e' || key == 'E') {
-			pos_z -= 2;
-			lookat_z -= 2;
-			glutPostRedisplay();
+	if (key == 'a' || key == 'A') {
+		pos_x -= 2;
+		lookat_x -= 2;
+		glutPostRedisplay();
+	}
+	else if (key == 'd' || key == 'D') {
+		pos_x += 2;
+		lookat_x += 2;
+		glutPostRedisplay();
 
-		}
-		else if (key == 'q' || key == 'Q') {
-			pos_z += 2;
-			lookat_z += 2;
-			glutPostRedisplay();
+	}
+	else if (key == 'e' || key == 'E') {
+		pos_z -= 2;
+		lookat_z -= 2;
+		glutPostRedisplay();
 
-		}
-		else if (key == 'w' || key == 'W') {
-			pos_y += 2;
-			lookat_y += 2;
-			glutPostRedisplay();
+	}
+	else if (key == 'q' || key == 'Q') {
+		pos_z += 2;
+		lookat_z += 2;
+		glutPostRedisplay();
 
-		}
-		else if (key == 's' || key == 'S') {
-			pos_y -= 2;
-			lookat_y -= 2;
-			glutPostRedisplay();
+	}
+	else if (key == 'w' || key == 'W') {
+		pos_y += 2;
+		lookat_y += 2;
+		glutPostRedisplay();
 
-		}
+	}
+	else if (key == 's' || key == 'S') {
+		pos_y -= 2;
+		lookat_y -= 2;
+		glutPostRedisplay();
+
+	}
 }
 
 
@@ -783,7 +783,7 @@ int main(int argc, char** argv)
 
 
 	parse_xml(teste_xml, world);
-	
+
 
 	// put GLUT’s init here
 	glutInit(&argc, argv); //iniciar o glut
@@ -803,18 +803,18 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(translate_camera_keyboard);
 	glutSpecialFunc(processSpecialKeys);
 
-	
+
 	glEnableClientState(GL_VERTEX_ARRAY);
-	GLuint *buffers = new GLuint[figs.pts_por_fig.size()];
+	GLuint* buffers = new GLuint[figs.pts_por_fig.size()];
 	glGenBuffers(figs.pts_por_fig.size(), buffers);
 
 
 	int i = 0;
-	for (std::pair<std::string, std::vector<Ponto>> pair: figs.pts_por_fig){
+	for (std::pair<std::string, std::vector<Ponto>> pair : figs.pts_por_fig) {
 		figs.indices[pair.first] = buffers[i];
 		float* points = pointvector_to_floatarray(pair.second);
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[i]);
-		glBufferData(GL_ARRAY_BUFFER, pair.second.size()*3 * sizeof(float), points, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, pair.second.size() * 3 * sizeof(float), points, GL_STATIC_DRAW);
 		i++;
 	}
 

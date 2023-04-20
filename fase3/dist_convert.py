@@ -1,10 +1,13 @@
 from pprint import pprint
 
+     
+          
+def convert_dist():
+    far = 2800
+    res = {}
 
-
-#            planeta | (dist ao sol em UA, diametro em km)
-
-info = {       'Sol': (0, 1391000),
+    #            planeta | (dist ao sol em UA, diametro em km)
+    info = {       'Sol': (0, 1391000),
                'Mercúrio': (0.39, 4879),
                'Vénus': (0.72, 12104),
                'Terra': (1.00, 12742),
@@ -15,11 +18,6 @@ info = {       'Sol': (0, 1391000),
                'Urano': (19.18, 50724),
                'Netuno': (30.07, 49244)
        }
-          
-          
-def convert_dist(info):
-    far = 2800
-    res = {}
    
     
     for planeta in info:
@@ -28,8 +26,11 @@ def convert_dist(info):
         dist_convert = round((dist_UA * far) / 30.07, 2) #regra de 3 simples
         dmt_convert = round((dmt * 0.35) / 4879, 2) #regra de 3 simples
         res[planeta] = (dist_convert, dmt_convert)
+
+    pprint(res)
+    print("\n")
     
     return res
         
 
-pprint(convert_dist(info))
+
