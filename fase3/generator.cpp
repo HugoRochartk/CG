@@ -348,7 +348,16 @@ void MxM(float M1[4][4], float M2[4][4], float res[4][4]) { // res = M1M2
     }  
 }
 
-float VxV(float* v1, float* v2) {
+
+void MxV(float m[4][4], float v[4], float res[4]) {
+    
+    for (int j = 0; j < 4; j++) {
+        res[j] = VxV(m[0], v);
+    }
+
+}
+
+float VxV(float v1[4], float v2[4]) {
     float res = 0;
 
     for (int i = 0; i < 4; i++) {
@@ -376,7 +385,25 @@ void constroi_matrizes_xyz(std::vector<Ponto> pontos, float xMatrix[4][4], float
 }
 
 
-void cria_curva_bezier(std::string patch_filename, int tesselation_level, std::string triangles_filename) {
+float cria_vetor(float i, float vet[4]) {
+
+    vet[0] = powf(i, 3);
+    vet[1] = powf(i, 2);
+    vet[2] = i;
+    vet[3] = 1;
+
+    return vet;
+}
+
+
+float B_u_v(float u[4], float m[4][4], float v[4]) {
+    float intermed[4];
+    MxV(m, v, intermed);
+    float res = VxV(u, intermed);
+    return res;
+}
+
+void cria_curva_bezier(std::string patch_filename, int tesselation, std::string triangles_filename) {
     std::ofstream fich = cria_ficheiro_3d(triangles_filename);
     std::ifstream patch = abre_ficheiro_patch(patch_filename);
     std::stringstream str_vertices;
@@ -425,6 +452,7 @@ void cria_curva_bezier(std::string patch_filename, int tesselation_level, std::s
                                  {  1,  0,  0, 0} 
                                };
     float matriz_intermedia[4][4];
+    float t = 1 / tesselation;
 
     for (std::pair<int, std::vector<Ponto>> par : patchnr_pontos) {
         constroi_matrizes_xyz(par.second, xMatrix, yMatrix, zMatrix);
@@ -434,6 +462,13 @@ void cria_curva_bezier(std::string patch_filename, int tesselation_level, std::s
         MxM(matriz_intermedia, BezierMatrix, yMatrix);
         MxM(BezierMatrix, zMatrix, matriz_intermedia);
         MxM(matriz_intermedia, BezierMatrix, zMatrix);
+
+
+        for (int i = 0; i <= 1; i += t) {
+            for (int j = 0; j <= 1; j += t) {
+
+            }
+        }
 
 
     }
