@@ -262,6 +262,9 @@ void cria_plano(float length, int divisions, std::string filename) {
 
 
     fich << str_vertices.str();
+
+
+
     fich.close();
 
 }
@@ -336,26 +339,18 @@ std::ifstream abre_ficheiro_patch(std::string filename) {
 }
 
 void MxM(float M1[4][4], float M2[4][4], float res[4][4]) { // res = M1M2
-    int val;
+    
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            val = 0;
+            res[i][j] = 0;
             for (int k = 0; k < 4; k++) {
-                val += (M1[i][k] * M2[k][j]);
+                res[i][j] += (M1[i][k] * M2[k][j]);
             }
-            res[i][j] = val;
         }
     }  
 }
 
 
-void MxV(float m[4][4], float v[4], float res[4]) {
-    
-    for (int j = 0; j < 4; j++) {
-        res[j] = VxV(m[0], v);
-    }
-
-}
 
 float VxV(float v1[4], float v2[4]) {
     float res = 0;
@@ -369,30 +364,41 @@ float VxV(float v1[4], float v2[4]) {
 
 }
 
+
+void MxV(float m[4][4], float v[4], float res[4]) {
+
+    for (int j = 0; j < 4; j++) {
+        res[j] = VxV(m[j], v);
+    }
+
+}
+
 void constroi_matrizes_xyz(std::vector<Ponto> pontos, float xMatrix[4][4], float yMatrix[4][4], float zMatrix[4][4]) {
 
-    int ind = 0;
+    int i = 0;
+    int j = 0;
 
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            xMatrix[j][i] = pontos[ind].x;
-            yMatrix[j][i] = pontos[ind].y;
-            zMatrix[j][i] = pontos[ind].z;
-            ind++;
+    for (Ponto p : pontos) {
+        xMatrix[i][j] = p.x;
+        yMatrix[i][j] = p.y;
+        zMatrix[i][j] = p.z;
+        i++;
+        if (i == 4) {
+            i = 0;
+            j++;
         }
     }
 
 }
 
 
-float cria_vetor(float i, float vet[4]) {
+void cria_vetor(float i, float vet[4]) {
 
     vet[0] = powf(i, 3);
     vet[1] = powf(i, 2);
     vet[2] = i;
     vet[3] = 1;
 
-    return vet;
 }
 
 
@@ -406,7 +412,6 @@ float B_u_v(float u[4], float m[4][4], float v[4]) {
 void cria_curva_bezier(std::string patch_filename, int tesselation, std::string triangles_filename) {
     std::ofstream fich = cria_ficheiro_3d(triangles_filename);
     std::ifstream patch = abre_ficheiro_patch(patch_filename);
-    std::stringstream str_vertices;
     int num_patches; int num_pontos;
     int indice;
     char virgula;
@@ -438,6 +443,7 @@ void cria_curva_bezier(std::string patch_filename, int tesselation, std::string 
     
     for (int i=0; i < num_patches; i++){
         std::vector<Ponto> pontos;
+
         for (int ind : patchnr_indices[i]) {
             pontos.push_back(pontonr_ponto[ind]);
         }
@@ -452,9 +458,12 @@ void cria_curva_bezier(std::string patch_filename, int tesselation, std::string 
                                  {  1,  0,  0, 0} 
                                };
     float matriz_intermedia[4][4];
-    float t = 1 / tesselation;
+    float t = 1.0 / tesselation;
+    float x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4;
+    float u_i[4], v_j[4], u_i_t[4], v_j_t[4];
 
     for (std::pair<int, std::vector<Ponto>> par : patchnr_pontos) {
+        std::stringstream str_vertices;
         constroi_matrizes_xyz(par.second, xMatrix, yMatrix, zMatrix);
         MxM(BezierMatrix, xMatrix, matriz_intermedia);
         MxM(matriz_intermedia, BezierMatrix, xMatrix); //BezierMatrixTransposta = BezierMatrix
@@ -464,16 +473,46 @@ void cria_curva_bezier(std::string patch_filename, int tesselation, std::string 
         MxM(matriz_intermedia, BezierMatrix, zMatrix);
 
 
-        for (int i = 0; i <= 1; i += t) {
-            for (int j = 0; j <= 1; j += t) {
+        for (float i = 0; i < 1; i += t) {
+            
+            cria_vetor(i, u_i);
+            cria_vetor(i + t, u_i_t);
+            for (float j = 0; j < 1; j += t) {
+                
+                cria_vetor(j, v_j);
+                cria_vetor(j+t, v_j_t);
+
+                x1 = B_u_v(u_i, xMatrix, v_j);
+                x2 = B_u_v(u_i_t, xMatrix, v_j);
+                x3 = B_u_v(u_i_t, xMatrix ,v_j_t);
+                x4 = B_u_v(u_i, xMatrix, v_j_t);
+
+                y1 = B_u_v(u_i, yMatrix, v_j);
+                y2 = B_u_v(u_i_t, yMatrix, v_j);
+                y3 = B_u_v(u_i_t, yMatrix, v_j_t);
+                y4 = B_u_v(u_i, yMatrix, v_j_t);
+
+                z1 = B_u_v(u_i, zMatrix, v_j);
+                z2 = B_u_v(u_i_t, zMatrix,v_j);
+                z3 = B_u_v(u_i_t, zMatrix,v_j_t);
+                z4 = B_u_v(u_i, zMatrix,v_j_t);
+
+
+                str_vertices << x1 << ' ' << y1 << ' ' << z1 << '\n';
+                str_vertices << x2 << ' ' << y2 << ' ' << z2 << '\n';
+                str_vertices << x4 << ' ' << y4 << ' ' << z4 << '\n';
+
+                str_vertices << x2 << ' ' << y2 << ' ' << z2 << '\n';
+                str_vertices << x3 << ' ' << y3 << ' ' << z3 << '\n';
+                str_vertices << x4 << ' ' << y4 << ' ' << z4 << '\n';
 
             }
         }
-
-
+        
+        fich << str_vertices.str();
+        
     }
     
-    fich << str_vertices.str();
     fich.close();
 }
 
