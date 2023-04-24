@@ -172,7 +172,20 @@
             <models>
                 <model file="sphere.3d" />
             </models>
-   
+        </group>
+	 <group> <!-- Cometa -->
+            <transform>
+                <translate time = "10" align="True" >
+                    <point x = "250" y = "250" z = "250" />
+                    <point x = "250" y = "-250" z = "-250" />
+                    <point x = "-250" y = "0" z = "-250" />
+                    <point x = "-250" y = "100" z = "150" />
+                </translate>
+		<scale x="5" y="5" z="5" />  
+            </transform>
+            <models>
+                <model file="bezier.3d" />
+            </models>
         </group>
         
     </group>
