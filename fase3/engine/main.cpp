@@ -656,7 +656,7 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 	path += ".xml";
 
 	if (teste_xml == "sistema_solar") {
-		radius = 100.0;
+		radius = 700.0;
 	}
 
 	tinyxml2::XMLDocument doc;
