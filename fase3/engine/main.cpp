@@ -218,6 +218,8 @@ std::vector<float> pointvector_to_floatvector(std::vector<Ponto> pontos) {
 }
 
 float y_aux[3] = { 0, 1, 0 };
+float x_aux[3] = { 1, 0, 0 };
+float z_aux[3] = { 0, 0, 1 };
 
 struct Transformacao {
 	float angulo;
@@ -226,6 +228,8 @@ struct Transformacao {
 	float z;
 	float time;
 	bool align;
+	bool align_y;
+	bool align_z;
 	std::vector<Ponto> pontos;
 	std::string flag;
 
@@ -246,10 +250,34 @@ struct Transformacao {
 		this->flag = "t";
 	}
 
-	void CatmullRom(float timei, bool aligni, std::vector<Ponto> pontosi) {
+	void CatmullRom_x(float timei, bool aligni, std::vector<Ponto> pontosi) {
 		this->align = aligni;
+		this->align_y = false;
+		this->align_z = false;
 		this->pontos = pontosi;
 		this->time = timei*1000;
+		map_t[pointvector_to_floatvector(pontosi)] = 0;
+		map_times_atual[pointvector_to_floatvector(pontosi)] = 0;
+		this->flag = "c";
+	}
+
+	void CatmullRom_y(bool aligni, float timei, std::vector<Ponto> pontosi) {
+		this->align_y = aligni;
+		this->align = false;
+		this->align_z = false;
+		this->pontos = pontosi;
+		this->time = timei * 1000;
+		map_t[pointvector_to_floatvector(pontosi)] = 0;
+		map_times_atual[pointvector_to_floatvector(pontosi)] = 0;
+		this->flag = "c";
+	}
+
+	void CatmullRom_z(float timei, std::vector<Ponto> pontosi, bool aligni) {
+		this->align_z = aligni;
+		this->align = false;
+		this->align_y = false;
+		this->pontos = pontosi;
+		this->time = timei * 1000;
 		map_t[pointvector_to_floatvector(pontosi)] = 0;
 		map_times_atual[pointvector_to_floatvector(pontosi)] = 0;
 		this->flag = "c";
@@ -325,6 +353,52 @@ struct Transformacao {
 
 				float rotMatrix[16];
 				buildRotMatrix((float*)deriv, (float*)y, (float*)z, (float*)rotMatrix);
+				glMultMatrixf((float*)rotMatrix);
+
+
+			}
+			else if (this->align_y == true) {
+
+				float x[3];
+				float z[3];
+
+				normalize((float*)deriv);
+
+				cross((float*)deriv, (float*)(z_aux), (float*)x);
+				normalize((float*)x);
+
+
+				cross((float*)x, (float*)deriv, (float*)z);
+				normalize((float*)z);
+
+				for (int i = 0; i < 3; i++)
+					z_aux[i] = z[i];
+
+				float rotMatrix[16];
+				buildRotMatrix((float*)x, (float*)deriv, (float*)z, (float*)rotMatrix);
+				glMultMatrixf((float*)rotMatrix);
+
+
+			}
+			else if (this->align_z == true) {
+
+				float x[3];
+				float y[3];
+
+				normalize((float*)deriv);
+
+				cross((float*)deriv, (float*)(x_aux), (float*)y);
+				normalize((float*)y);
+
+
+				cross((float*)y, (float*)deriv, (float*)x);
+				normalize((float*)x);
+
+				for (int i = 0; i < 3; i++)
+					x_aux[i] = x[i];
+
+				float rotMatrix[16];
+				buildRotMatrix((float*)x, (float*)y, (float*)deriv, (float*)rotMatrix);
 				glMultMatrixf((float*)rotMatrix);
 
 
@@ -487,9 +561,23 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 							pontos.push_back(Ponto(x, y, z));
 							ponto = ponto->NextSiblingElement("point");
 						}
-						Transformacao nt = Transformacao();
-						nt.CatmullRom(time, align, pontos);
-						transfs.push_back(nt);
+						if (tipo_transf->Attribute("align") == nullptr) {
+							if (tipo_transf->Attribute("aligny") != nullptr) {
+								Transformacao nt = Transformacao();
+								nt.CatmullRom_y(true, time, pontos);
+								transfs.push_back(nt);
+							}
+							else if (tipo_transf->Attribute("alignz") != nullptr) {
+								Transformacao nt = Transformacao();
+								nt.CatmullRom_z(time, pontos, true);
+								transfs.push_back(nt);
+							}
+						}
+						else {
+							Transformacao nt = Transformacao();
+							nt.CatmullRom_x(time, align, pontos);
+							transfs.push_back(nt);
+						}
 					}
 					else {
 						float x, y, z;
