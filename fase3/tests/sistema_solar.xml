@@ -181,7 +181,7 @@
                     <point x = "-250" y = "0" z = "-250" />
                     <point x = "-250" y = "100" z = "150" />
                 </translate>
-		<scale x="5" y="5" z="5" />  
+		<scale x="2.5" y="2.5" z="2.5" />  
             </transform>
             <models>
                 <model file="bezier.3d" />
