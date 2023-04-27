@@ -512,6 +512,7 @@ struct FiguraData {
 	std::map<std::string, std::vector<Ponto>> pts_por_fig;
 	std::map<std::string, std::vector<Ponto>> normais_por_fig;
 	std::map<std::string, GLuint> indices;
+	std::map<std::string, GLuint> indices_normais;
 
 
 
@@ -920,7 +921,12 @@ void renderScene(void)
 		}
 		glBindBuffer(GL_ARRAY_BUFFER, figs.indices[nick]);
 		glVertexPointer(3, GL_FLOAT, 0, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, figs.indices_normais[nick]);
+		glNormalPointer(GL_FLOAT, 0, 0);
 		glDrawArrays(GL_TRIANGLES, 0, figs.pts_por_fig[nick].size() * 3);
+
+		float clear[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		glMaterialfv(GL_FRONT, GL_EMISSION, clear);
 		glPopMatrix();
 	}
 
@@ -1042,6 +1048,9 @@ int main(int argc, char** argv)
 	glutCreateWindow("CG@TP"); //cria a janela com o nome
 
 
+	glEnable(GL_LIGHTING);
+	glEnable(GL_RESCALE_NORMAL);
+
 	glewInit();
 
 
@@ -1054,16 +1063,22 @@ int main(int argc, char** argv)
 
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	GLuint* buffers = new GLuint[figs.pts_por_fig.size()];
-	glGenBuffers(figs.pts_por_fig.size(), buffers);
+	glEnableClientState(GL_NORMAL_ARRAY);
+
+	GLuint* buffers = new GLuint[figs.pts_por_fig.size() + figs.normais_por_fig.size()];
+	glGenBuffers(figs.pts_por_fig.size() + figs.normais_por_fig.size(), buffers);
 
 
 	int i = 0;
 	for (std::pair<std::string, std::vector<Ponto>> pair : figs.pts_por_fig) {
 		figs.indices[pair.first] = buffers[i];
+		figs.indices_normais[pair.first] = buffers[i + figs.pts_por_fig.size()];
 		float* points = pointvector_to_floatarray(pair.second);
+		float* normais = pointvector_to_floatarray(figs.normais_por_fig[pair.first]);
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[i]);
 		glBufferData(GL_ARRAY_BUFFER, pair.second.size() * 3 * sizeof(float), points, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[i + figs.pts_por_fig.size()]);
+		glBufferData(GL_ARRAY_BUFFER, figs.normais_por_fig[pair.first].size() * 3 * sizeof(float), normais, GL_STATIC_DRAW);
 		i++;
 	}
 
