@@ -1,0 +1,10 @@
+^C:\USERS\UTILIZADOR\DESKTOP\CG-PROJETO\FASE3\ENGINE\CMAKELISTS.TXT
+setlocal
+C:\Users\Utilizador\Desktop\CG\CMake\bin\cmake.exe -SC:/Users/Utilizador/Desktop/CG-Projeto/fase3/engine -BC:/Users/Utilizador/Desktop/CG-Projeto/fase3/engine/build --check-stamp-file C:/Users/Utilizador/Desktop/CG-Projeto/fase3/engine/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

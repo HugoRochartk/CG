@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Users\Utilizador\Desktop\CG-Projeto\fase3\engine\main.cpp(153,21): warning C4838: a conversão de 'double' em 'float' requer uma conversão de restrição
+C:\Users\Utilizador\Desktop\CG-Projeto\fase3\engine\main.cpp(153,31): warning C4838: a conversão de 'double' em 'float' requer uma conversão de restrição
+C:\Users\Utilizador\Desktop\CG-Projeto\fase3\engine\main.cpp(154,25): warning C4838: a conversão de 'double' em 'float' requer uma conversão de restrição
+C:\Users\Utilizador\Desktop\CG-Projeto\fase3\engine\main.cpp(141): warning C4172: retornando o endereço da variável local ou temporário: res
+  class4.vcxproj -> C:\Users\Utilizador\Desktop\CG-Projeto\fase3\engine\build\Debug\class4.exe
