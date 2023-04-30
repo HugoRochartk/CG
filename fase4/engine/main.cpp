@@ -217,9 +217,75 @@ std::vector<float> pointvector_to_floatvector(std::vector<Ponto> pontos) {
 	return res;
 }
 
-float y_aux[3] = { 0, 1, 0 };
-float x_aux[3] = { 1, 0, 0 };
-float z_aux[3] = { 0, 0, 1 };
+
+
+int indice_luz = 0;
+
+struct Luz {
+	int gl_lightn;
+	float pos[4];
+	float dir[4];
+	float cutoff;
+	std::string flag;
+
+
+	Luz() {
+		this->gl_lightn = -1;
+		this->cutoff = -1;
+		this->flag = "undefined";
+	}
+
+	void Directional(float dirx, float diry, float dirz) {
+		this->dir[0] = dirx;
+		this->dir[1] = diry;
+		this->dir[2] = dirz;
+		this->dir[3] = 0.0;
+		this->flag = "d";
+	}
+
+	void Point(float px, float py, float pz) {
+		this->pos[0] = px;
+		this->pos[1] = py;
+		this->pos[2] = pz;
+		this->pos[3] = 1.0;
+		this->flag = "p";
+	}
+
+	void Spot(float px, float py, float pz, float dirx, float diry, float dirz, float cutoffi) {
+		this->pos[0] = px;
+		this->pos[1] = py;
+		this->pos[2] = pz;
+		this->pos[3] = 1.0;
+		this->dir[0] = dirx;
+		this->dir[1] = diry;
+		this->dir[2] = dirz;
+		this->dir[3] = 0.0;
+		this->cutoff = cutoffi;
+		this->flag = "s";
+	}
+
+	void set_indice() {
+		this->gl_lightn = GL_LIGHT0 + indice_luz;
+		indice_luz++;
+	}
+
+	void aplica_Luz() {
+		if (this->flag == "d") {
+			glLightfv(this->gl_lightn, GL_POSITION, this->dir);
+
+		}
+		else if (this->flag == "p") {
+			glLightfv(this->gl_lightn, GL_POSITION, this->pos);
+		}
+		else if (this->flag == "s") {
+			glLightfv(this->gl_lightn, GL_POSITION, this->pos);
+			glLightfv(this->gl_lightn, GL_SPOT_DIRECTION, this->dir);
+			glLightfv(this->gl_lightn, GL_SPOT_CUTOFF, &(this->cutoff));
+		}
+		else { ; }
+	}
+
+};
 
 struct Cores {
 	float RGB[4];
@@ -288,7 +354,7 @@ struct Cores {
 
 		}
 		else if (this->flag == "sh") {
-			glMaterialfv(GL_FRONT, GL_SHININESS, this->RGB);
+			glMaterialf(GL_FRONT, GL_SHININESS, this->shininess);
 
 		}
 		else { ; }
@@ -296,6 +362,13 @@ struct Cores {
 
 
 };
+
+
+float y_aux[3] = { 0, 1, 0 };
+float x_aux[3] = { 1, 0, 0 };
+float z_aux[3] = { 0, 0, 1 };
+
+
 struct Transformacao {
 	float angulo;
 	float x;
@@ -521,7 +594,7 @@ struct FiguraData {
 			this->pts_por_fig[nick] = pts_aux;
 		}
 	}
-
+	
 	void Add_Normais_to_FiguraData(std::string nick, std::vector<Ponto> pts_aux) {
 		if (this->normais_por_fig.find(nick) == this->normais_por_fig.end()) {
 			this->normais_por_fig[nick] = pts_aux;
@@ -596,25 +669,30 @@ float* pointvector_to_floatarray(std::vector<Ponto> pontos) {
 
 
 
-void armazena_pontos(std::string nome_fich, std::vector<Ponto> pontos, std::vector<Ponto> normais) {
+std::vector<std::vector<Ponto>> armazena_pontos(std::string nome_fich) {
 
 
 	std::string path = "..\\..\\3d\\";
 	path += nome_fich;
 	
+	std::vector<std::vector<Ponto>> res;
 	std::ifstream fich(path);
 	if (fich.is_open()) {
+		std::vector<Ponto> pontos; std::vector<Ponto> normais;
 		float x, y, z, x2, y2, z2;
 		while (fich >> x >> y >> z >> x2 >> y2 >> z2) {
 			pontos.push_back(Ponto(x, y, z));
 			normais.push_back(Ponto(x2, y2, z2));
 		}
 		fich.close();
+		res.push_back(pontos);
+		res.push_back(normais);
+		return res;
 	}
 	else {
 		std::cout << "Não foi possível abrir o ficheiro " << nome_fich << ".\n";
+		return res;
 	}
-
 
 }
 
@@ -717,30 +795,22 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 		if (models) {
 			auto model = models->FirstChildElement("model");
 			while (model != nullptr) {
-				std::vector<Cores> cores;
 				std::vector<Ponto> pontos; std::vector<Ponto> normais;
-				armazena_pontos(model->Attribute("file"), pontos, normais);
+				std::vector<std::vector<Ponto>> both = armazena_pontos(model->Attribute("file"));
+				pontos = both[0];
+				normais = both[1];
 				figs.Add_Pts_to_FiguraData(model->Attribute("file"), pontos);
 				figs.Add_Normais_to_FiguraData(model->Attribute("file"), normais);
 
 				std::vector<Cores> vect_cores;
-
+				
 				tinyxml2::XMLElement* colors = model->FirstChildElement("color");
 				if (colors) {
 					auto color = colors->FirstChildElement();
 					while (color != nullptr) {
 						std::string nick = color->Name();
 
-						if (nick == "diffuse") {
-							float r = color->FloatAttribute("R") / 255;
-							float g = color->FloatAttribute("G") / 255;
-							float b = color->FloatAttribute("B") / 255;
-
-							Cores nc = Cores();
-							nc.Diffuse(r, g, b);
-							vect_cores.push_back(nc);
-						}
-						else if (nick == "ambient") {
+						if (nick == "ambient") {
 							float r = color->FloatAttribute("R") / 255;
 							float g = color->FloatAttribute("G") / 255;
 							float b = color->FloatAttribute("B") / 255;
@@ -750,14 +820,14 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 							nc.Ambient(r, g, b);
 							vect_cores.push_back(nc);
 						}
-						else if (nick == "specular") {
+
+						else if (nick == "diffuse") {
 							float r = color->FloatAttribute("R") / 255;
 							float g = color->FloatAttribute("G") / 255;
 							float b = color->FloatAttribute("B") / 255;
 
-
 							Cores nc = Cores();
-							nc.Specular(r, g, b);
+							nc.Diffuse(r, g, b);
 							vect_cores.push_back(nc);
 						}
 						else if (nick == "emissive") {
@@ -768,6 +838,16 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 
 							Cores nc = Cores();
 							nc.Emissive(r, g, b);
+							vect_cores.push_back(nc);
+						}
+						else if (nick == "specular") {
+							float r = color->FloatAttribute("R") / 255;
+							float g = color->FloatAttribute("G") / 255;
+							float b = color->FloatAttribute("B") / 255;
+
+
+							Cores nc = Cores();
+							nc.Specular(r, g, b);
 							vect_cores.push_back(nc);
 						}
 						else if (nick == "shininess") {
@@ -794,6 +874,8 @@ void parse_group(tinyxml2::XMLElement* g, std::vector<Transformacao> transfs) {
 
 
 }
+
+std::vector<Luz> luzes;
 
 void parse_xml(const std::string& teste_xml, WorldData& data) {
 	std::string path = "..\\..\\tests\\";
@@ -850,6 +932,58 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 			data.camera.projection.far = projection->FloatAttribute("far");
 		}
 	}
+	
+
+	tinyxml2::XMLElement* lights = world->FirstChildElement("lights");
+	if (lights) {
+		tinyxml2::XMLElement* light = lights->FirstChildElement("light");
+		while (light != nullptr) {
+			auto nick = light->Attribute("type");
+			if (nick == "directional") {
+				float dirx = light->FloatAttribute("dirx");
+				float diry = light->FloatAttribute("diry");
+				float dirz = light->FloatAttribute("dirz");
+
+				Luz nl = Luz();
+				nl.Directional(dirx, diry, dirz);
+				nl.set_indice();
+				luzes.push_back(nl);
+
+
+			}
+			else if (nick == "point") {
+				float posx = light->FloatAttribute("posx");
+				float posy = light->FloatAttribute("posy");
+				float posz = light->FloatAttribute("posz");
+
+				Luz nl = Luz();
+				nl.Point(posx, posy, posz);
+				nl.set_indice();
+				luzes.push_back(nl);
+
+			}
+			else if (nick == "spot") {
+				float posx = light->FloatAttribute("posx");
+				float posy = light->FloatAttribute("posy");
+				float posz = light->FloatAttribute("posz");
+				float dirx = light->FloatAttribute("dirx");
+				float diry = light->FloatAttribute("diry");
+				float dirz = light->FloatAttribute("dirz");
+				float cutoff = light->FloatAttribute("cutoff");
+
+				Luz nl = Luz();
+				nl.Spot(posx, posy, posz, dirx, diry, dirz, cutoff);
+				nl.set_indice();
+				luzes.push_back(nl);
+
+			}
+
+
+			light = light->NextSiblingElement("light");
+
+		}
+	}
+	
 
 	// Read group data
 	tinyxml2::XMLElement* group = world->FirstChildElement("group");
@@ -857,6 +991,8 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 		std::vector<Transformacao> transfs;
 		parse_group(group, transfs);
 	}
+
+	
 
 	pos_x = data.camera.position.x;
 	pos_y = data.camera.position.y;
@@ -888,10 +1024,11 @@ void renderScene(void)
 		lookat_x, lookat_y, lookat_z,
 		up_x, up_y, up_z);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT, GL_FILL);
 
 	// put drawing instructions here
 	//eixos
+	glDisable(GL_LIGHTING);
 	glBegin(GL_LINES);
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(-100.0f, 0.0f, 0.0f);
@@ -906,8 +1043,13 @@ void renderScene(void)
 	glVertex3f(0.0f, 0.0f, 100.0f);
 
 	glEnd();
+	glEnable(GL_LIGHTING);
 
-	//pontos
+	
+	for (Luz l : luzes) {
+		l.aplica_Luz();
+	}
+	
 
 	glColor3f(1.0f, 1.0f, 1.0f);
 	for (Transfs_por_Fig tpf : trfs_por_fig) {
@@ -1048,11 +1190,7 @@ int main(int argc, char** argv)
 	glutCreateWindow("CG@TP"); //cria a janela com o nome
 
 
-	glEnable(GL_LIGHTING);
-	glEnable(GL_RESCALE_NORMAL);
-
 	glewInit();
-
 
 	// put callback registry here
 	glutReshapeFunc(changeSize); //chama uma funçao com 2 parametros width e height (changeSize)
@@ -1061,31 +1199,61 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(translate_camera_keyboard);
 	glutSpecialFunc(processSpecialKeys);
 
+	
+	glEnable(GL_LIGHTING);
+	glEnable(GL_RESCALE_NORMAL);
+	
+	float dark[4] = { 0.2, 0.2, 0.2, 1.0 };
+	float white[4] = { 1.0, 1.0, 1.0, 1.0 };
+	float black[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+
+	for (Luz l : luzes) {
+		glEnable(l.gl_lightn);
+
+		
+		// light colors
+		glLightfv(l.gl_lightn, GL_AMBIENT, dark);
+		glLightfv(l.gl_lightn, GL_DIFFUSE, white);
+		glLightfv(l.gl_lightn, GL_SPECULAR, white);
+		// controls global ambient light 
+		//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, dark);
+
+
+	}
+
+	float amb[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
+
+
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 
-	GLuint* buffers = new GLuint[figs.pts_por_fig.size() + figs.normais_por_fig.size()];
-	glGenBuffers(figs.pts_por_fig.size() + figs.normais_por_fig.size(), buffers);
+	GLuint* buffers_p = new GLuint[figs.pts_por_fig.size()];
+	GLuint* buffers_n = new GLuint[figs.normais_por_fig.size()];
+
+	glGenBuffers(figs.pts_por_fig.size(), buffers_p);
+	glGenBuffers(figs.normais_por_fig.size(), buffers_n);
 
 
 	int i = 0;
 	for (std::pair<std::string, std::vector<Ponto>> pair : figs.pts_por_fig) {
-		figs.indices[pair.first] = buffers[i];
-		figs.indices_normais[pair.first] = buffers[i + figs.pts_por_fig.size()];
+		figs.indices[pair.first] = buffers_p[i];
+		figs.indices_normais[pair.first] = buffers_n[i];
 		float* points = pointvector_to_floatarray(pair.second);
 		float* normais = pointvector_to_floatarray(figs.normais_por_fig[pair.first]);
-		glBindBuffer(GL_ARRAY_BUFFER, buffers[i]);
+		glBindBuffer(GL_ARRAY_BUFFER, buffers_p[i]);
 		glBufferData(GL_ARRAY_BUFFER, pair.second.size() * 3 * sizeof(float), points, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, buffers[i + figs.pts_por_fig.size()]);
+		glBindBuffer(GL_ARRAY_BUFFER, buffers_n[i]);
 		glBufferData(GL_ARRAY_BUFFER, figs.normais_por_fig[pair.first].size() * 3 * sizeof(float), normais, GL_STATIC_DRAW);
 		i++;
 	}
 
 	// some OpenGL settings
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
-	//glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glEnable(GL_CULL_FACE);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// enter GLUT’s main cycle
 	glutMainLoop(); //ciclo do glut; enquanto a janela nao for fechada chama o renderScene e processa eventos
@@ -1093,3 +1261,5 @@ int main(int argc, char** argv)
 
 	return 1;
 }
+
+
