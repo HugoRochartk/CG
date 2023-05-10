@@ -938,7 +938,8 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 	if (lights) {
 		tinyxml2::XMLElement* light = lights->FirstChildElement("light");
 		while (light != nullptr) {
-			auto nick = light->Attribute("type");
+			std::string nick = light->Attribute("type");
+			
 			if (nick == "directional") {
 				float dirx = light->FloatAttribute("dirx");
 				float diry = light->FloatAttribute("diry");
@@ -952,10 +953,11 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 
 			}
 			else if (nick == "point") {
+				
 				float posx = light->FloatAttribute("posx");
 				float posy = light->FloatAttribute("posy");
 				float posz = light->FloatAttribute("posz");
-
+				
 				Luz nl = Luz();
 				nl.Point(posx, posy, posz);
 				nl.set_indice();
@@ -1216,9 +1218,7 @@ int main(int argc, char** argv)
 		glLightfv(l.gl_lightn, GL_AMBIENT, dark);
 		glLightfv(l.gl_lightn, GL_DIFFUSE, white);
 		glLightfv(l.gl_lightn, GL_SPECULAR, white);
-		// controls global ambient light 
-		//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, dark);
-
+		
 
 	}
 

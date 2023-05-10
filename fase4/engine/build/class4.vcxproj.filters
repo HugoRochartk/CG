@@ -4,7 +4,7 @@
     <ClCompile Include="C:\Users\Utilizador\Desktop\CG-Projeto\fase4\engine\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\fase3\engine\tinyxml2.cpp" />
+    <ClCompile Include="..\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\Utilizador\Desktop\CG-Projeto\fase4\engine\CMakeLists.txt" />
@@ -15,6 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\fase3\engine\tinyxml2.h" />
+    <ClInclude Include="..\tinyxml2.h" />
   </ItemGroup>
 </Project>
