@@ -21,6 +21,14 @@ struct Ponto {
     }
 };
 
+void normalize(float *a) {
+    float l = sqrt(a[0]*a[0] + a[1] * a[1] + a[2] * a[2]);
+    if(l!=0){
+        a[0] = a[0]/l;
+        a[1] = a[1]/l;
+        a[2] = a[2]/l;
+    }
+}
 
 std::ofstream cria_ficheiro_3d(std::string s) {
     std::ofstream fich;
@@ -38,24 +46,47 @@ void cria_esfera(float radius, int slices, int stacks, std::string filename) {
     float alpha = (2 * M_PI) / slices; //valor angulo alpha
     float beta = M_PI / stacks; //valor angulo beta, nao precisa de ser 2pi porque nao vai dar a volta a esfera
     float px1, px2, px3, px4, py1, py2, pz1, pz2, pz3, pz4; //coordenadas cartezianas
+    float p1n[3],p2n[3],p3n[3],p4n[3];
 
     for (int i = 0; i < slices; i++) {
         for (int j = 0; j < stacks; j++) {
             //cria um quadrado composto por 2 triangulos a cada itera��o ou apenas um triangulo na primeira e ultima itera�ao
             px1 = radius * cos(M_PI_2 - j * beta) * sin(i * alpha); //ponto comum aos dois 
+            p1n[0] = cos(M_PI_2 - j * beta) * sin(i * alpha);
+
             px2 = radius * cos(M_PI_2 - (j + 1) * beta) * sin(i * alpha); //ponto do primeiro
+            p2n[0] = cos(M_PI_2 - (j + 1) * beta) * sin(i * alpha);
+
             px3 = radius * cos(M_PI_2 - (j + 1) * beta) * sin((i + 1) * alpha); //ponto comum aos dois
+            p3n[0] = cos(M_PI_2 - (j + 1) * beta) * sin((i + 1) * alpha);
+
             px4 = radius * cos(M_PI_2 - j * beta) * sin((i + 1) * alpha); //ponto do segundo
+            p4n[0] = cos(M_PI_2 - j * beta) * sin((i + 1) * alpha);
 
             py1 = radius * sin(M_PI_2 - j * beta); //valor superior y
+            p1n[1] = sin(M_PI_2 - j * beta);
+            p4n[1] = sin(M_PI_2 - j * beta);
+
             py2 = radius * sin(M_PI_2 - (j + 1) * beta); //valor inferior y
+            p2n[1] = sin(M_PI_2 - (j + 1) * beta);
+            p3n[1] = sin(M_PI_2 - (j + 1) * beta);
 
             pz1 = radius * cos(M_PI_2 - j * beta) * cos(i * alpha); //ponto comum aos dois 
+            p1n[2] = cos(M_PI_2 - j * beta) * cos(i * alpha);
+
             pz2 = radius * cos(M_PI_2 - (j + 1) * beta) * cos(i * alpha); //ponto do primeiro
+            p2n[2] = cos(M_PI_2 - (j + 1) * beta) * cos(i * alpha);
+
             pz3 = radius * cos(M_PI_2 - (j + 1) * beta) * cos((i + 1) * alpha); //ponto comum aos dois 
+            p3n[2] = cos(M_PI_2 - (j + 1) * beta) * cos((i + 1) * alpha);
+            
             pz4 = radius * cos(M_PI_2 - j * beta) * cos((i + 1) * alpha); //ponto do segundo
+            p4n[2] = cos(M_PI_2 - j * beta) * cos((i + 1) * alpha);
 
-
+            normalize(p1n);
+            normalize(p2n);
+            normalize(p3n);
+            normalize(p4n);
 
             str_vertices << px1 << ' ' << py1 << ' ' << pz1 << '\n';
             str_vertices << px2 << ' ' << py2 << ' ' << pz2 << '\n';
