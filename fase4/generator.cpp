@@ -89,14 +89,24 @@ void cria_esfera(float radius, int slices, int stacks, std::string filename) {
             normalize(p4n);
 
             str_vertices << px1 << ' ' << py1 << ' ' << pz1 << '\n';
+            str_vertices << p1n[0] << ' ' << p1n[1] << ' ' << p1n[2] << ' ';
+
             str_vertices << px2 << ' ' << py2 << ' ' << pz2 << '\n';
+            str_vertices << p2n[0] << ' ' << p2n[1] << ' ' << p2n[2] << ' ';
+
             str_vertices << px3 << ' ' << py2 << ' ' << pz3 << '\n';
+            str_vertices << p3n[0] << ' ' << p3n[1] << ' ' << p3n[2] << ' ';
 
 
 
             str_vertices << px1 << ' ' << py1 << ' ' << pz1 << '\n';
+            str_vertices << p1n[0] << ' ' << p1n[1] << ' ' << p1n[2] << ' ';
+
             str_vertices << px3 << ' ' << py2 << ' ' << pz3 << '\n';
+            str_vertices << p3n[0] << ' ' << p3n[1] << ' ' << p3n[2] << ' ';
+
             str_vertices << px4 << ' ' << py1 << ' ' << pz4 << '\n';
+            str_vertices<< p4n[0] << ' ' << p4n[1] << ' ' << p4n[2] << ' ';
 
         }
 
