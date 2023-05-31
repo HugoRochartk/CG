@@ -287,28 +287,22 @@ void cria_caixa(float length, int divisions, std::string filename) {
 
             str_vertices << x2 << ' ' << y2 << ' ' << -z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << -1 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << (i + 1) * aux << '\n';
 
             str_vertices << x1 << ' ' << y1 << ' ' << -z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << -1 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
 
             str_vertices << x1 << ' ' << y2 << ' ' << -z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << -1 << '\n';
-            //str_vertices << j * aux << ' ' << (i + 1) * aux << '\n';
 
 
             str_vertices << x1 << ' ' << y1 << ' ' << -z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << -1 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
 
             str_vertices << x2 << ' ' << y2 << ' ' << -z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << -1 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << (i + 1) * aux << '\n';
 
             str_vertices << x2 << ' ' << y1 << ' ' << -z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << -1 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << i * aux << '\n';
 
         }
     }
@@ -323,8 +317,9 @@ void cria_cone(float radius, float height, int slices, int stacks, std::string f
     std::stringstream str_vertices;
 
     float alpha = (2 * M_PI) / slices;
-    float x1, x2, z1, z2;
+    float x1, x2, z1, z2, ny;
     float y = height;
+    float p1n[3], p2n[3], p3n[3], p4n[3];
 
     for (int i = 0; i < slices; i++) {
         x2 = radius * sin(i * alpha);
@@ -332,14 +327,19 @@ void cria_cone(float radius, float height, int slices, int stacks, std::string f
         z2 = radius * cos(i * alpha);
         z1 = radius * cos((i + 1) * alpha);
 
-        str_vertices << x2 << ' ' << 0 << ' ' << z2 << '\n';
-        str_vertices << 0 << ' ' << 0 << ' ' << 0 << '\n';
-        str_vertices << x1 << ' ' << 0 << ' ' << z1 << '\n';
+        str_vertices << x2 << ' ' << 0 << ' ' << z2 << ' ';
+        str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
 
+        str_vertices << 0 << ' ' << 0 << ' ' << 0 << ' ';
+        str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
+
+        str_vertices << x1 << ' ' << 0 << ' ' << z1 << ' ';
+        str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
 
 
     }
 
+    ny = sin(atan(radius/height));
     float x3, z3, x4, z4, y1, y2;
     float stack_height = height / stacks; // altura de cada stack 
     float cone_ratio = height / radius; // valor da altura em funcao do raio -> h = 3.2 * raio
@@ -355,29 +355,55 @@ void cria_cone(float radius, float height, int slices, int stacks, std::string f
             y1 = (i * stack_height);
 
             x1 = raio_stack_atual * sin(j * alpha);
+            p1n[0] = sin(j * alpha);
+
             z1 = raio_stack_atual * cos(j * alpha);
+            p1n[2] = cos(j * alpha);
+
 
             x2 = raio_stack_atual * sin((j + 1) * alpha);
+            p2n[0] = sin((j + 1) * alpha);
+
             z2 = raio_stack_atual * cos((j + 1) * alpha);
+            p2n[2] = cos((j + 1) * alpha);
 
             y2 = (i + 1) * stack_height;
 
             x3 = raio_stack_seguinte * sin((j + 1) * alpha);
+            p3n[0] = sin((j + 1) * alpha);
+
             z3 = raio_stack_seguinte * cos((j + 1) * alpha);
+            p3n[2] = cos((j + 1) * alpha);
 
             x4 = raio_stack_seguinte * sin(j * alpha);
+            p4n[0] = sin(j * alpha);
+
             z4 = raio_stack_seguinte * cos(j * alpha);
+            p4n[2] = cos(j * alpha);
+
+            p1n[1] = ny;
+            p2n[1] = ny;
+            p3n[1] = ny;
+            p4n[1] = ny;
+
+            str_vertices << x1 << ' ' << y1 << ' ' << z1 << ' ';
+            str_vertices << p1n[0] << ' ' << p1n[1] << ' ' << p1n[2] << '\n';
+
+            str_vertices << x2 << ' ' << y1 << ' ' << z2 << ' ';
+            str_vertices << p2n[0] << ' ' << p2n[1] << ' ' << p2n[2] << '\n';
+
+            str_vertices << x4 << ' ' << y2 << ' ' << z4 << ' ';
+            str_vertices << p4n[0] << ' ' << p4n[1] << ' ' << p4n[2] << '\n';
 
 
+            str_vertices << x4 << ' ' << y2 << ' ' << z4 << ' ';
+            str_vertices << p4n[0] << ' ' << p4n[1] << ' ' << p4n[2] << '\n';
 
-            str_vertices << x1 << ' ' << y1 << ' ' << z1 << '\n';
-            str_vertices << x2 << ' ' << y1 << ' ' << z2 << '\n';
-            str_vertices << x4 << ' ' << y2 << ' ' << z4 << '\n';
-
-
-            str_vertices << x4 << ' ' << y2 << ' ' << z4 << '\n';
-            str_vertices << x2 << ' ' << y1 << ' ' << z2 << '\n';
-            str_vertices << x3 << ' ' << y2 << ' ' << z3 << '\n';
+            str_vertices << x2 << ' ' << y1 << ' ' << z2 << ' ';
+            str_vertices << p2n[0] << ' ' << p2n[1] << ' ' << p2n[2] << '\n';
+            
+            str_vertices << x3 << ' ' << y2 << ' ' << z3 << ' ';
+            str_vertices << p3n[0] << ' ' << p3n[1] << ' ' << p3n[2] << '\n';
 
         }
     }
