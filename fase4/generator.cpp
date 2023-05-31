@@ -133,55 +133,42 @@ void cria_caixa(float length, int divisions, std::string filename) {
 
             str_vertices << x1 << ' ' << y << ' ' << z1 << ' ';
             str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
 
             str_vertices << x2 << ' ' << y << ' ' << z2 << ' ';
             str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
-            //str_vertices << (j+1) * aux << ' ' << (i+1) * aux << '\n';
 
             str_vertices << x1 << ' ' << y << ' ' << z2 << ' ';
             str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
-            //str_vertices << j * aux << ' ' << (i+1) * aux << '\n';
 
             
             str_vertices << x1 << ' ' << y << ' ' << z1 << ' ';
             str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
 
             str_vertices << x2 << ' ' << y << ' ' << z1 << ' ';
             str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
-            //str_vertices << (j+1) * aux << ' ' << i * aux << '\n';
 
             str_vertices << x2 << ' ' << y << ' ' << z2 << ' ';
             str_vertices << 0 << ' ' << -1 << ' ' << 0 << '\n';
-            //str_vertices << (j+1) * aux << ' ' << (i+1) * aux << '\n';
-
 
 
             str_vertices << x2 << ' ' << -y << ' ' << z2 << ' ';
             str_vertices << 0 << ' ' << 1 << ' ' << 0 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << (i + 1) * aux << '\n';
             
             str_vertices << x1 << ' ' << -y << ' ' << z1 << ' ';
             str_vertices << 0 << ' ' << 1 << ' ' << 0 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
 
             str_vertices << x1 << ' ' << -y << ' ' << z2 << ' ';
             str_vertices << 0 << ' ' << 1 << ' ' << 0 << '\n';
-            //str_vertices << j * aux << ' ' << (i + 1) * aux << '\n';
 
 
             str_vertices << x2 << ' ' << -y << ' ' << z2 << ' ';
             str_vertices << 0 << ' ' << 1 << ' ' << 0 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << (i + 1) * aux << '\n';
 
             str_vertices << x2 << ' ' << -y << ' ' << z1 << ' ';
             str_vertices << 0 << ' ' << 1 << ' ' << 0 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << i * aux << '\n';
             
             str_vertices << x1 << ' ' << -y << ' ' << z1 << ' ';
             str_vertices << 0 << ' ' << 1 << ' ' << 0 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
         }
     }
 
@@ -196,55 +183,42 @@ void cria_caixa(float length, int divisions, std::string filename) {
 
             str_vertices << x << ' ' << y2 << ' ' << z1 << ' ';
             str_vertices << -1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << (i + 1) * aux << ' ' << j * aux << '\n';
 
             str_vertices << x << ' ' << y1 << ' ' << z1 << ' ';
             str_vertices << -1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << i * aux << ' ' << j * aux << '\n';
 
             str_vertices << x << ' ' << y2 << ' ' << z2 << ' ';
             str_vertices << -1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << (i + 1) * aux << ' ' << (j + 1) * aux << '\n';
 
 
             str_vertices << x << ' ' << y1 << ' ' << z2 << ' ';
             str_vertices << -1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << i * aux << ' ' << (j + 1) * aux << '\n';
 
             str_vertices << x << ' ' << y2 << ' ' << z2 << ' ';
             str_vertices << -1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << (i + 1) * aux << ' ' << (j + 1) * aux << '\n';
 
             str_vertices << x << ' ' << y1 << ' ' << z1 << ' ';
             str_vertices << -1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << i * aux << ' ' << j * aux << '\n';
-
 
 
             str_vertices << -x << ' ' << y2 << ' ' << z1 << ' ';
             str_vertices << 1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << (i + 1) * aux << ' ' << j * aux << '\n';
 
             str_vertices << -x << ' ' << y2 << ' ' << z2 << ' ';
             str_vertices << 1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << (i + 1) * aux << ' ' << (j + 1) * aux << '\n';
 
             str_vertices << -x << ' ' << y1 << ' ' << z1 << ' ';
             str_vertices << 1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << i * aux << ' ' << j * aux << '\n';
 
 
             str_vertices << -x << ' ' << y1 << ' ' << z2 << ' ';
             str_vertices << 1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << i * aux << ' ' << (j + 1) * aux << '\n';
 
             str_vertices << -x << ' ' << y1 << ' ' << z1 << ' ';
             str_vertices << 1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << i * aux << ' ' << j * aux << '\n';
 
             str_vertices << -x << ' ' << y2 << ' ' << z2 << ' ';
             str_vertices << 1 << ' ' << 0 << ' ' << 0 << '\n';
-            //str_vertices << (i + 1) * aux << ' ' << (j + 1) * aux << '\n';
         }
     }
 
@@ -260,28 +234,22 @@ void cria_caixa(float length, int divisions, std::string filename) {
 
             str_vertices << x2 << ' ' << y2 << ' ' << z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << 1 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << (i + 1) * aux << '\n';
 
             str_vertices << x1 << ' ' << y2 << ' ' << z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << 1 << '\n';
-            //str_vertices << j * aux << ' ' << (i + 1) * aux << '\n';
 
             str_vertices << x1 << ' ' << y1 << ' ' << z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << 1 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
 
 
             str_vertices << x1 << ' ' << y1 << ' ' << z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << 1 << '\n';
-            //str_vertices << j * aux << ' ' << i * aux << '\n';
 
             str_vertices << x2 << ' ' << y1 << ' ' << z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << 1 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << i * aux << '\n';
 
             str_vertices << x2 << ' ' << y2 << ' ' << z << ' ';
             str_vertices << 0 << ' ' << 0 << ' ' << 1 << '\n';
-            //str_vertices << (j + 1) * aux << ' ' << (i + 1) * aux << '\n';
 
 
 
