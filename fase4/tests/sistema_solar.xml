@@ -7,7 +7,7 @@
         <projection fov="60" near="1" far="3000" /> 
     </camera>
     <lights>
-	<light type="directional" dirx="0" diry="0" dirz="0" />
+	<light type="point" dirx="0" diry="0" dirz="0" />
     </lights>
     <group>
         <group> <!-- Sol -->
@@ -18,11 +18,11 @@
             <models>
                 <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="255" G="0" B="0" />
-				<specular R="25" G="0" B="0" />
-				<emissive R="255" G="0" B="0" />
-				<shininess value="100" />
+				<diffuse R="255" G="130" B="0" />
+				<ambient R="255" G="130" B="0" />
+				<specular R="0" G="0" B="0" />
+				<emissive R="0" G="0" B="0" />
+				<shininess value="0" />
 			</color>
 		</model>
             </models>
@@ -45,11 +45,11 @@
             <models>
                 <model file="sphere.3d" >
 			<color>
-				<diffuse R="0" G="221" B="0" />
-				<ambient R="0" G="100" B="0" />
-				<specular R="0" G="100" B="0" />
-				<emissive R="0" G="100" B="0" />
-				<shininess value="0" />
+				<diffuse R="100" G="0" B="0" />
+				<ambient R="40" G="0" B="0" />
+				<specular R="90" G="90" B="90" />
+				<emissive R="0" G="0" B="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>
@@ -73,11 +73,11 @@
             <models>
                 <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="0" G="0" B="0" />
-				<specular R="0" G="0" B="0" />
+				<diffuse R="200" G="170" B="100" />
+				<ambient R="140" G="120" B="60" />
+				<specular R="40" G="40" B="40" />
 				<emissive R="0" G="0" B="0" />
-				<shininess value="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>            
@@ -100,11 +100,11 @@
             <models>
                  <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="0" G="0" B="0" />
-				<specular R="0" G="0" B="0" />
+				<diffuse R="0" G="113" B="188" />
+				<ambient R="0" G="113" B="188" />
+				<specular R="50" G="50" B="50" />
 				<emissive R="0" G="0" B="0" />
-				<shininess value="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>
@@ -128,11 +128,11 @@
             <models>
                 <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="0" G="0" B="0" />
-				<specular R="0" G="0" B="0" />
+				<diffuse R="197" G="68" B="45" />
+				<ambient R="197" G="68" B="45" />
+				<specular R="50" G="50" B="50" />
 				<emissive R="0" G="0" B="0" />
-				<shininess value="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>            
@@ -155,11 +155,11 @@
             <models>
                 <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="0" G="0" B="0" />
-				<specular R="0" G="0" B="0" />
+				<diffuse R="240" G="100" B="76" />
+				<ambient R="170" G="50" B="32" />
+				<specular R="40" G="40" B="40" />
 				<emissive R="0" G="0" B="0" />
-				<shininess value="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>
@@ -184,11 +184,11 @@
             <models>
                  <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="0" G="0" B="0" />
-				<specular R="0" G="0" B="0" />
+				<diffuse R="150" G="140" B="130" />
+				<ambient R="130" G="110" B="80" />
+				<specular R="10" G="10" B="10" />
 				<emissive R="0" G="0" B="0" />
-				<shininess value="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>
@@ -213,11 +213,11 @@
             <models>
                 <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="0" G="0" B="0" />
-				<specular R="0" G="0" B="0" />
+				<diffuse R="153" G="204" B="255" />
+				<ambient R="153" G="204" B="255" />
+				<specular R="10" G="10" B="10" />
 				<emissive R="0" G="0" B="0" />
-				<shininess value="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>            
@@ -241,11 +241,11 @@
             <models>
                 <model file="sphere.3d" >
 			<color>
-				<diffuse R="254" G="221" B="0" />
-				<ambient R="0" G="0" B="0" />
-				<specular R="0" G="0" B="0" />
+				<diffuse R="68" G="106" B="201" />
+				<ambient R="68" G="106" B="201" />
+				<specular R="40" G="40" B="40" />
 				<emissive R="0" G="0" B="0" />
-				<shininess value="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>            
@@ -263,11 +263,11 @@
             <models>
                 <model file="bezier.3d" >
 			<color>
-				<diffuse R="255" G="255" B="0" />
-				<ambient R="255" G="255" B="0" />
-				<specular R="255" G="255" B="0" />
-				<emissive R="255" G="255" B="0" />
-				<shininess value="100" />
+				<diffuse R="102" G="0" B="102" /> 
+				<ambient R="102" G="0" B="102" />
+				<specular R="30" G="0" B="30" />
+				<emissive R="0" G="0" B="0" />
+				<shininess value="1" />
 			</color>
 		</model>
             </models>
