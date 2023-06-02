@@ -476,7 +476,9 @@ struct Transformacao {
 		}
 		else if (this->flag == "c") {
 
+			glDisable(GL_LIGHTING);
 			renderCatmullRomCurve(this->pontos);
+			glEnable(GL_LIGHTING);
 
 			float pos[3], deriv[3];
 			getGlobalCatmullRomPoint(map_t[pointvector_to_floatvector(this->pontos)] , (float*)pos, (float*)deriv, this->pontos);
@@ -1012,7 +1014,7 @@ void parse_xml(const std::string& teste_xml, WorldData& data) {
 
 }
 
-
+bool teste_sist_solar = false;
 
 void renderScene(void)
 {
@@ -1030,22 +1032,27 @@ void renderScene(void)
 
 	// put drawing instructions here
 	//eixos
-	glDisable(GL_LIGHTING);
-	glBegin(GL_LINES);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(-100.0f, 0.0f, 0.0f);
-	glVertex3f(100.0f, 0.0f, 0.0f);
+	if (teste_sist_solar == false) {
 
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0.0f, -100.0f, 0.0f);
-	glVertex3f(0.0f, 100.0f, 0.0f);
+		glDisable(GL_LIGHTING);
+		glBegin(GL_LINES);
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(-100.0f, 0.0f, 0.0f);
+		glVertex3f(100.0f, 0.0f, 0.0f);
 
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, -100.0f);
-	glVertex3f(0.0f, 0.0f, 100.0f);
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(0.0f, -100.0f, 0.0f);
+		glVertex3f(0.0f, 100.0f, 0.0f);
 
-	glEnd();
-	glEnable(GL_LIGHTING);
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(0.0f, 0.0f, -100.0f);
+		glVertex3f(0.0f, 0.0f, 100.0f);
+
+		glEnd();
+
+		glEnable(GL_LIGHTING);
+
+	}
 
 	
 	for (Luz l : luzes) {
@@ -1165,6 +1172,7 @@ void translate_camera_keyboard(unsigned char key, int x, int y) {
 
 
 
+
 int main(int argc, char** argv)
 {
 
@@ -1180,6 +1188,10 @@ int main(int argc, char** argv)
 		std::cout << "Não foi possível abrir o ficheiro testar_xml.txt.\n";
 	}
 
+
+	if (teste_xml == "sistema_solar") {
+		teste_sist_solar = true;
+	}
 
 	parse_xml(teste_xml, world);
 
