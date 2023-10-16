@@ -1,6 +1,6 @@
 # CG
 
-Sistema Solar dinâmico em OpenGL
+Solar System made in OpenGL
 
 
 
